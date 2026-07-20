@@ -222,7 +222,7 @@ function renderCards() {
 }
 
 // Global Wallet Connect
-async function connectGlobalWallet() {
+window.connectGlobalWallet = async function() {
     if (!window.ethereum) {
         alert("MetaMask wallet extension was not detected. You can test unlocking feeds instantly using the '⚡ Instant Demo Unlock' button inside any dataset modal!");
         return;
@@ -238,10 +238,11 @@ async function connectGlobalWallet() {
         }
     } catch (err) {
         console.error("Wallet connection error:", err);
+        alert("MetaMask Status: " + (err.message || "Connection prompt closed or locked"));
         const navBtnText = document.getElementById("navWalletText");
         if (navBtnText) navBtnText.innerText = "Connect Wallet";
     }
-}
+};
 
 function updateWalletUI() {
     const navBtnText = document.getElementById("navWalletText");
