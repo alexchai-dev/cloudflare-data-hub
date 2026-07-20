@@ -326,7 +326,7 @@ function closeModal() {
 }
 
 // Instant Demo Unlock
-function demoInstantUnlock() {
+window.demoInstantUnlock = function() {
     if (!currentDataset) return;
     
     const paymentStatus = document.getElementById("paymentStatus");
@@ -355,6 +355,10 @@ function demoInstantUnlock() {
         const workerUrl = `https://data-hub-api.izzor2021.workers.dev${currentDataset.endpoint}`;
         apiCurlSnippet.innerText = `curl -H "x-payment-tx: ${currentTxHash}" "${workerUrl}"`;
     }
+};
+
+function demoInstantUnlock() {
+    window.demoInstantUnlock();
 }
 
 // Web3 Payment Handler
@@ -394,7 +398,7 @@ async function processWeb3Payment() {
                     params: [{ chainId: targetChainId }]
                 });
             } catch (switchError) {
-                if (switchError.code === 4902) {
+                if (switchError && switchError.code === 4902) {
                     const chainParams = selectedNetwork === "arbitrum" ? {
                         chainId: "0xa4b1",
                         chainName: "Arbitrum One",
@@ -413,7 +417,7 @@ async function processWeb3Payment() {
                         params: [chainParams]
                     });
                 } else {
-                    throw switchError;
+                    console.warn("Chain switch note:", switchError);
                 }
             }
         }
@@ -423,7 +427,7 @@ async function processWeb3Payment() {
             paymentStatus.innerText = "Sending 0.01 USDC payment transaction...";
         }
 
-        const usdcAddress = USDC_CONTRACTS[selectedNetwork];
+        const usdcAddress = USDC_CONTRACTS[selectedNetwork] || USDC_CONTRACTS.arbitrum;
         const amountHex = "0x0000000000000000000000000000000000000000000000000000000000002710"; // 0.01 USDC
         const recipientClean = MERCHANT_WALLET.substring(2).padStart(64, "0");
         const transferData = "0xa9059cbb" + recipientClean + amountHex;
@@ -438,13 +442,21 @@ async function processWeb3Payment() {
             }]
         });
 
-        demoInstantUnlock();
+        if (txHash) {
+            currentTxHash = txHash;
+            window.demoInstantUnlock();
+        }
 
     } catch (err) {
-        console.error("Payment error:", err);
+        console.error("Payment error details:", err);
         if (paymentStatus) {
             paymentStatus.className = "status-msg error";
-            paymentStatus.innerText = err.message || "Payment failed.";
+            const errStr = err && err.message ? err.message : String(err);
+            if (errStr.includes("user rejected") || errStr.includes("User rejected")) {
+                paymentStatus.innerText = "Transaction cancelled by user.";
+            } else {
+                paymentStatus.innerText = "Insufficient ETH gas balance or testnet token. Click '⚡ Instant Demo Unlock' below!";
+            }
         }
     }
 }
