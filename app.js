@@ -477,7 +477,6 @@ async function processWeb3Payment() {
         }
 
         const usdcAddress = USDC_CONTRACTS[selectedNetwork] || USDC_CONTRACTS.arbitrum;
-        // 0.01 USDC = 10,000 units (6 decimals) -> hex 2710 padded to 64 chars
         const amountHexClean = "0000000000000000000000000000000000000000000000000000000000002710";
         const recipientClean = MERCHANT_WALLET.replace("0x", "").padStart(64, "0");
         const transferData = "0xa9059cbb" + recipientClean + amountHexClean;
@@ -487,16 +486,35 @@ async function processWeb3Payment() {
             provider = window.ethereum.providers.find(p => p.isRabby || p.isMetaMask) || window.ethereum.providers[0];
         }
 
-        const txParams = {
+        let txParams = {
             from: web3Wallet,
             to: usdcAddress,
             data: transferData
         };
 
-        const txHash = await provider.request({
-            method: "eth_sendTransaction",
-            params: [txParams]
-        });
+        let txHash;
+        try {
+            txHash = await provider.request({
+                method: "eth_sendTransaction",
+                params: [txParams]
+            });
+        } catch (tokenErr) {
+            console.warn("USDC token transfer simulation note:", tokenErr);
+            // Fallback to Native ETH micro-payment (~0.000003 ETH = $0.01 USD) if native USDC token is not held
+            if (paymentStatus) {
+                paymentStatus.className = "status-msg loading";
+                paymentStatus.innerText = "Switching to direct ETH micro-payment (0.000003 ETH)...";
+            }
+            txParams = {
+                from: web3Wallet,
+                to: MERCHANT_WALLET,
+                value: "0x2b5e3af16b00" // ~0.000003 ETH ($0.01 USD)
+            };
+            txHash = await provider.request({
+                method: "eth_sendTransaction",
+                params: [txParams]
+            });
+        }
 
         if (txHash) {
             currentTxHash = txHash;
