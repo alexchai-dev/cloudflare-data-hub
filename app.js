@@ -657,14 +657,64 @@ function setupEventListeners() {
 
     const verifyHashBtn = document.getElementById("verifyHashBtn");
     if (verifyHashBtn) {
-        verifyHashBtn.addEventListener("click", () => {
+        verifyHashBtn.addEventListener("click", async () => {
             const input = document.getElementById("manualTxHash");
             const hashVal = input ? input.value.trim() : "";
-            if (hashVal.length >= 20) {
-                currentTxHash = hashVal;
-                window.demoInstantUnlock(true); // Unlock full live feed!
-            } else {
-                alert("Please paste a valid transaction hash (starting with 0x...)");
+            const paymentStatus = document.getElementById("paymentStatus");
+
+            if (!hashVal || !hashVal.startsWith("0x") || hashVal.length !== 66) {
+                if (paymentStatus) {
+                    paymentStatus.className = "status-msg error";
+                    paymentStatus.innerText = "❌ Invalid format. Tx Hash must be 66 characters starting with 0x.";
+                }
+                return;
+            }
+
+            if (paymentStatus) {
+                paymentStatus.className = "status-msg loading";
+                paymentStatus.innerText = `⌛ Querying ${selectedNetwork === 'arbitrum' ? 'Arbitrum' : 'Base'} RPC node for on-chain status...`;
+            }
+
+            const rpcUrl = selectedNetwork === "arbitrum" ? "https://arb1.arbitrum.io/rpc" : "https://mainnet.base.org";
+
+            try {
+                const response = await fetch(rpcUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        jsonrpc: "2.0",
+                        method: "eth_getTransactionReceipt",
+                        params: [hashVal],
+                        id: 1
+                    })
+                });
+                const data = await response.json();
+                
+                if (data && data.result && data.result.status === "0x1") {
+                    const blockNum = parseInt(data.result.blockNumber, 16);
+                    currentTxHash = hashVal;
+                    window.demoInstantUnlock(true); // Unlock full feed!
+                    if (paymentStatus) {
+                        paymentStatus.className = "status-msg success";
+                        paymentStatus.innerText = `✓ On-Chain Payment Verified! Confirmed in block #${blockNum}.`;
+                    }
+                } else if (data && data.result && data.result.status === "0x0") {
+                    if (paymentStatus) {
+                        paymentStatus.className = "status-msg error";
+                        paymentStatus.innerText = "❌ Transaction reverted on-chain (Status: Failed). Access denied.";
+                    }
+                } else {
+                    if (paymentStatus) {
+                        paymentStatus.className = "status-msg error";
+                        paymentStatus.innerText = `❌ Transaction ${hashVal.substring(0, 10)}... not found on ${selectedNetwork === 'arbitrum' ? 'Arbitrum' : 'Base'} network.`;
+                    }
+                }
+            } catch (err) {
+                console.error("RPC verification error:", err);
+                if (paymentStatus) {
+                    paymentStatus.className = "status-msg error";
+                    paymentStatus.innerText = "❌ RPC network verification error. Please check network connection.";
+                }
             }
         });
     }
