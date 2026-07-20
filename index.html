@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x402 Data Hub | High-Value Datasets for Autonomous AI Agents</title>
+    <meta name="description" content="Decentralized marketplace for real-time AI & SaaS data feeds with Web3 micro-payments on Arbitrum One and Base.">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand">
+                <span class="brand-badge">x402</span>
+                <span class="brand-text">Data Hub</span>
+            </a>
+            <div class="nav-right">
+                <nav class="nav-links">
+                    <a href="#catalog" class="nav-link"><i class="fa-solid fa-database"></i> Data Catalog</a>
+                    <a href="#docs" class="nav-link"><i class="fa-solid fa-code"></i> API Docs</a>
+                    <a href="https://github.com/alexchai-dev/cloudflare-data-hub" target="_blank" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                </nav>
+                <button class="btn-wallet" id="navWalletBtn">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span id="navWalletText">Connect Wallet</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="container hero-content">
+            <div class="hero-tag">
+                <span class="pulse-dot"></span>
+                <span>Web3 Micro-Payment Data API &bull; Arbitrum & Base</span>
+            </div>
+            <h1>High-Value Datasets for <br><span class="gradient-text">Autonomous AI Agents</span></h1>
+            <p class="hero-sub">Monetized real-time feeds for LLMs, SaaS pricing, expat housing, and developer metrics. Instant HTTP 402 access powered by L2 micro-payments.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <span class="stat-value">107+</span>
+                    <span class="stat-label">Live Datasets</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-box">
+                    <span class="stat-value">$0.01</span>
+                    <span class="stat-label">Starting Price</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-box">
+                    <span class="stat-value">&lt; 50ms</span>
+                    <span class="stat-label">Worker Latency</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-box">
+                    <span class="stat-value">L2 Web3</span>
+                    <span class="stat-label">Arbitrum & Base</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Catalog Section -->
+    <main class="container catalog-section" id="catalog">
+        <div class="catalog-header">
+            <div>
+                <h2>Explore Data Feeds</h2>
+                <p class="section-desc">Select a dataset to inspect schema, connect wallet, or unlock instantly.</p>
+            </div>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search datasets (e.g. LLM, rent, SaaS)...">
+            </div>
+        </div>
+
+        <div class="category-filters" id="categoryFilters">
+            <button class="filter-btn active" data-category="all">All Feeds</button>
+            <button class="filter-btn" data-category="saas"><i class="fa-solid fa-cloud"></i> SaaS & Pricing</button>
+            <button class="filter-btn" data-category="ai"><i class="fa-solid fa-brain"></i> AI & ML</button>
+            <button class="filter-btn" data-category="expat"><i class="fa-solid fa-plane"></i> Expat & Living</button>
+            <button class="filter-btn" data-category="finance"><i class="fa-solid fa-coins"></i> Finance & Crypto</button>
+            <button class="filter-btn" data-category="jobs"><i class="fa-solid fa-briefcase"></i> Tech Jobs</button>
+            <button class="filter-btn" data-category="legal"><i class="fa-solid fa-scale-balanced"></i> Legal & Tax</button>
+        </div>
+
+        <!-- Grid of dataset cards (rendered dynamically by JS) -->
+        <div class="catalog-grid" id="catalogGrid"></div>
+    </main>
+
+    <!-- Developer API Integration Section -->
+    <section class="container docs-section" id="docs">
+        <div class="docs-card">
+            <div class="docs-header">
+                <div>
+                    <h3><i class="fa-solid fa-terminal"></i> Developer API Integration</h3>
+                    <p>Accessing premium feeds via Cloudflare Workers is seamless for AI agents and scripts:</p>
+                </div>
+                <span class="badge-http402">HTTP 402 Payment Required</span>
+            </div>
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Python Example</span>
+                    <button class="copy-btn" id="copyCodeBtn"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code id="pythonCode">import requests
+
+url = "https://data-hub-api.izzor2021.workers.dev/ai/llm-latency"
+headers = {"x-payment-tx": "0xdc51b4810baf023cd62d5a846ee5d022517c041802c7e03c781d6add6ecce9c4"}
+response = requests.get(url, headers=headers)
+print("Unlocked Data:", response.json())</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Dataset Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <span class="modal-badge" id="modalBadge">Expat & Living</span>
+                <h3 id="modalTitle">Dataset Name</h3>
+                <code class="endpoint-url" id="modalEndpoint">GET /endpoint</code>
+            </div>
+            
+            <div class="modal-grid">
+                <div class="modal-left">
+                    <h4>Description</h4>
+                    <p id="modalDesc">Detailed dataset description...</p>
+                    
+                    <div class="payment-card">
+                        <div class="payment-card-header">
+                            <h5><i class="fa-solid fa-wallet"></i> Web3 Micro-Payment</h5>
+                            <span class="price-value" id="modalPrice">0.01 USDC</span>
+                        </div>
+                        
+                        <div class="net-select-row">
+                            <span class="pay-label">Select Network:</span>
+                            <div class="net-buttons">
+                                <button class="net-btn active" id="netArb">Arbitrum</button>
+                                <button class="net-btn" id="netBase">Base</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-pay-primary" id="web3PayBtn">
+                            <i class="fa-solid fa-wallet"></i> Connect Wallet to Pay
+                        </button>
+                        <button class="btn-demo-unlock" id="demoPayBtn">
+                            <i class="fa-solid fa-bolt"></i> Instant Demo Unlock (Preview)
+                        </button>
+                        
+                        <div class="status-msg" id="paymentStatus">Connect wallet or click Instant Demo Unlock below.</div>
+
+                        <div class="manual-pay-area">
+                            <button class="manual-toggle-btn" id="manualToggleBtn">Or pay manually with Tx Hash <i class="fa-solid fa-chevron-down"></i></button>
+                            <div class="manual-details hidden" id="manualPayDetails">
+                                <div class="merchant-row">
+                                    <span>Merchant:</span>
+                                    <code class="merchant-addr">0xB23B0d7d25113E991D2931Ca147677A5b5Da40E4</code>
+                                    <button class="icon-btn" id="copyMerchantBtn"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                                <div class="hash-input-box">
+                                    <input type="text" id="manualTxHash" placeholder="Paste 0x... tx hash">
+                                    <button class="btn-verify" id="verifyHashBtn">Verify</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-right">
+                    <div class="preview-header">
+                        <h4 id="previewTitle">Data Schema Preview</h4>
+                        <div class="unlocked-actions hidden" id="unlockedActions">
+                            <button class="btn-action btn-copy btn-cp" id="copyJsonBtn"><i class="fa-regular fa-copy"></i> Copy JSON</button>
+                            <button class="btn-action btn-download btn-dl" id="downloadJsonBtn"><i class="fa-solid fa-download"></i> Download .json</button>
+                        </div>
+                    </div>
+                    
+                    <div class="json-container"><pre><code id="jsonPreview" class="json-code">{}</code></pre></div>
+                    
+                    <div class="api-curl-card hidden" id="apiSnippetBox">
+                        <div class="api-curl-header">
+                            <span><i class="fa-solid fa-terminal"></i> cURL API Access Snippet</span>
+                            <button class="copy-small-btn" id="copySnippetBtn"><i class="fa-regular fa-copy"></i> Copy cURL</button>
+                        </div>
+                        <pre><code id="apiCurlSnippet">curl -H "x-payment-tx: YOUR_TX_HASH" ...</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 x402 Data Hub. Decentralized HTTP 402 micro-payment infrastructure.</p>
+            <div class="footer-links">
+                <a href="https://github.com/alexchai-dev/cloudflare-data-hub" target="_blank"><i class="fa-brands fa-github"></i> GitHub Repository</a>
+                <a href="https://data-hub-api.izzor2021.workers.dev/expat/rent-tbilisi" target="_blank"><i class="fa-solid fa-bolt"></i> Cloudflare Worker API</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
