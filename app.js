@@ -487,15 +487,15 @@ async function processWeb3Payment() {
             provider = window.ethereum.providers.find(p => p.isRabby || p.isMetaMask) || window.ethereum.providers[0];
         }
 
+        const txParams = {
+            from: web3Wallet,
+            to: usdcAddress,
+            data: transferData
+        };
+
         const txHash = await provider.request({
             method: "eth_sendTransaction",
-            params: [{
-                from: web3Wallet,
-                to: usdcAddress,
-                data: transferData,
-                value: "0x0",
-                gas: "0x186a0" // 100,000 gas limit for Trezor & Rabby hardware wallet compatibility
-            }]
+            params: [txParams]
         });
 
         if (txHash) {
