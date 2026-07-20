@@ -650,6 +650,20 @@ function setupEventListeners() {
         });
     }
 
+    const verifyHashBtn = document.getElementById("verifyHashBtn");
+    if (verifyHashBtn) {
+        verifyHashBtn.addEventListener("click", () => {
+            const input = document.getElementById("manualTxHash");
+            const hashVal = input ? input.value.trim() : "";
+            if (hashVal.length >= 20) {
+                currentTxHash = hashVal;
+                window.demoInstantUnlock(true); // Unlock full live feed!
+            } else {
+                alert("Please paste a valid transaction hash (starting with 0x...)");
+            }
+        });
+    }
+
     const copyJsonBtn = document.getElementById("copyJsonBtn");
     if (copyJsonBtn) copyJsonBtn.addEventListener("click", copyUnlockedJson);
 
