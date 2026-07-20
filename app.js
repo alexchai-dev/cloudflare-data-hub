@@ -369,6 +369,9 @@ window.demoInstantUnlock = function(isFullPayment = true) {
         const jsonPreview = document.getElementById("jsonPreview");
         if (jsonPreview) jsonPreview.innerText = JSON.stringify(currentUnlockedData, null, 2);
         
+        const modalDlBtn = document.getElementById("modalDlBtn");
+        if (modalDlBtn) modalDlBtn.classList.remove("hidden");
+        
         const unlockedActions = document.getElementById("unlockedActions");
         if (unlockedActions) unlockedActions.classList.remove("hidden");
         
@@ -382,6 +385,8 @@ window.demoInstantUnlock = function(isFullPayment = true) {
         }
     } else {
         // Free Sample Schema Preview
+        const modalDlBtn = document.getElementById("modalDlBtn");
+        if (modalDlBtn) modalDlBtn.classList.add("hidden");
         if (paymentStatus) {
             paymentStatus.className = "status-msg loading";
             paymentStatus.innerText = "ℹ Sample Schema Loaded (Free). Pay 0.01 USDC to unlock full live data feed.";
@@ -669,6 +674,9 @@ function setupEventListeners() {
 
     const downloadJsonBtn = document.getElementById("downloadJsonBtn");
     if (downloadJsonBtn) downloadJsonBtn.addEventListener("click", downloadUnlockedJson);
+
+    const modalDlBtn = document.getElementById("modalDlBtn");
+    if (modalDlBtn) modalDlBtn.addEventListener("click", downloadUnlockedJson);
 
     const copySnippetBtn = document.getElementById("copySnippetBtn");
     if (copySnippetBtn) copySnippetBtn.addEventListener("click", copyApiSnippet);
