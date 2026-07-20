@@ -223,22 +223,38 @@ function renderCards() {
 
 // Global Wallet Connect
 window.connectGlobalWallet = async function() {
-    if (!window.ethereum) {
-        alert("MetaMask wallet extension was not detected. You can test unlocking feeds instantly using the '⚡ Instant Demo Unlock' button inside any dataset modal!");
+    if (web3Wallet) {
+        const choice = confirm(`Connected Wallet:\n${web3Wallet}\n\nWould you like to disconnect or switch wallet?`);
+        if (choice) {
+            web3Wallet = null;
+            updateWalletUI();
+        }
         return;
     }
+
+    if (!window.ethereum) {
+        alert("MetaMask / EVM Wallet extension was not detected. You can test unlocking feeds instantly using the '⚡ Instant Demo Unlock' button inside any dataset modal!");
+        return;
+    }
+
     try {
         const navBtnText = document.getElementById("navWalletText");
         if (navBtnText) navBtnText.innerText = "Connecting...";
         
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        // Handle provider selection if Rabby / MetaMask conflict exists
+        let provider = window.ethereum;
+        if (window.ethereum.providers && window.ethereum.providers.length) {
+            provider = window.ethereum.providers.find(p => p.isMetaMask) || window.ethereum.providers[0];
+        }
+
+        const accounts = await provider.request({ method: "eth_requestAccounts" });
         if (accounts && accounts.length > 0) {
             web3Wallet = accounts[0];
             updateWalletUI();
         }
     } catch (err) {
         console.error("Wallet connection error:", err);
-        alert("MetaMask Status: " + (err.message || "Connection prompt closed or locked"));
+        alert("Wallet Status: " + (err.message || "Connection prompt closed or locked"));
         const navBtnText = document.getElementById("navWalletText");
         if (navBtnText) navBtnText.innerText = "Connect Wallet";
     }
