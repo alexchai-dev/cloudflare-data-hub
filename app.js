@@ -477,17 +477,24 @@ async function processWeb3Payment() {
         }
 
         const usdcAddress = USDC_CONTRACTS[selectedNetwork] || USDC_CONTRACTS.arbitrum;
-        const amountHex = "0x0000000000000000000000000000000000000000000000000000000000002710"; // 0.01 USDC
-        const recipientClean = MERCHANT_WALLET.substring(2).padStart(64, "0");
-        const transferData = "0xa9059cbb" + recipientClean + amountHex;
+        // 0.01 USDC = 10,000 units (6 decimals) -> hex 2710 padded to 64 chars
+        const amountHexClean = "0000000000000000000000000000000000000000000000000000000000002710";
+        const recipientClean = MERCHANT_WALLET.replace("0x", "").padStart(64, "0");
+        const transferData = "0xa9059cbb" + recipientClean + amountHexClean;
 
-        const txHash = await window.ethereum.request({
+        let provider = window.ethereum;
+        if (window.ethereum.providers && window.ethereum.providers.length) {
+            provider = window.ethereum.providers.find(p => p.isRabby || p.isMetaMask) || window.ethereum.providers[0];
+        }
+
+        const txHash = await provider.request({
             method: "eth_sendTransaction",
             params: [{
                 from: web3Wallet,
                 to: usdcAddress,
                 data: transferData,
-                value: "0x0"
+                value: "0x0",
+                gas: "0x186a0" // 100,000 gas limit for Trezor & Rabby hardware wallet compatibility
             }]
         });
 
