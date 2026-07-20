@@ -660,12 +660,23 @@ function setupEventListeners() {
         verifyHashBtn.addEventListener("click", async () => {
             const input = document.getElementById("manualTxHash");
             const hashVal = input ? input.value.trim() : "";
+            const cleanHash = hashVal.toLowerCase();
             const paymentStatus = document.getElementById("paymentStatus");
 
             if (!hashVal || !hashVal.startsWith("0x") || hashVal.length !== 66) {
                 if (paymentStatus) {
                     paymentStatus.className = "status-msg error";
                     paymentStatus.innerText = "❌ Invalid format. Tx Hash must be 66 characters starting with 0x.";
+                }
+                return;
+            }
+
+            // Anti-Replay Single-Use Check
+            const redeemedTxHashes = JSON.parse(sessionStorage.getItem("redeemedTxHashes") || "{}");
+            if (currentDataset && redeemedTxHashes[cleanHash] && redeemedTxHashes[cleanHash] !== currentDataset.id) {
+                if (paymentStatus) {
+                    paymentStatus.className = "status-msg error";
+                    paymentStatus.innerText = `❌ Replay Attack Blocked: Tx Hash ${cleanHash.substring(0, 10)}... was already used to unlock dataset "${redeemedTxHashes[cleanHash]}". Each 0.01 USDC payment unlocks 1 dataset.`;
                 }
                 return;
             }
@@ -693,10 +704,17 @@ function setupEventListeners() {
                 if (data && data.result && data.result.status === "0x1") {
                     const blockNum = parseInt(data.result.blockNumber, 16);
                     currentTxHash = hashVal;
+
+                    // Bind Tx Hash to current dataset to prevent reuse
+                    if (currentDataset) {
+                        redeemedTxHashes[cleanHash] = currentDataset.id;
+                        sessionStorage.setItem("redeemedTxHashes", JSON.stringify(redeemedTxHashes));
+                    }
+
                     window.demoInstantUnlock(true); // Unlock full feed!
                     if (paymentStatus) {
                         paymentStatus.className = "status-msg success";
-                        paymentStatus.innerText = `✓ On-Chain Payment Verified! Confirmed in block #${blockNum}.`;
+                        paymentStatus.innerText = `✓ On-Chain Payment Verified! Single-use Tx registered for ${currentDataset.title} (Block #${blockNum}).`;
                     }
                 } else if (data && data.result && data.result.status === "0x0") {
                     if (paymentStatus) {
