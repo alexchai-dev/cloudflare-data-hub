@@ -317,16 +317,16 @@ function openModal(dataset) {
     const paymentStatus = document.getElementById("paymentStatus");
     if (paymentStatus) {
         paymentStatus.className = "status-msg";
-        paymentStatus.innerText = web3Wallet ? `Wallet connected (${web3Wallet.substring(0, 6)}...). Pay or click Instant Demo Unlock.` : "Connect wallet or click Instant Demo Unlock below.";
+        paymentStatus.innerText = web3Wallet ? `Wallet connected (${web3Wallet.substring(0, 6)}...). Pay 0.01 USDC for full live feed or preview sample schema free.` : "Free sample schema preview available. Pay 0.01 USDC to unlock full feed.";
     }
 
     const web3PayBtn = document.getElementById("web3PayBtn");
     if (web3PayBtn) {
         web3PayBtn.disabled = false;
         if (web3Wallet) {
-            web3PayBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Pay ${dataset.price_usdc} USDC`;
+            web3PayBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Pay ${dataset.price_usdc} USDC for Full Feed`;
         } else {
-            web3PayBtn.innerHTML = `<i class="fa-solid fa-wallet"></i> Connect Wallet to Pay`;
+            web3PayBtn.innerHTML = `<i class="fa-solid fa-wallet"></i> Connect Wallet to Pay (${dataset.price_usdc} USDC)`;
         }
     }
 
@@ -341,40 +341,73 @@ function closeModal() {
     currentTxHash = null;
 }
 
-// Instant Demo Unlock
-window.demoInstantUnlock = function() {
+// Instant Demo Unlock (Sample Preview or Verified Full Unlock)
+window.demoInstantUnlock = function(isFullPayment = true) {
     if (!currentDataset) return;
     
     const paymentStatus = document.getElementById("paymentStatus");
-    if (paymentStatus) {
-        paymentStatus.className = "status-msg success";
-        paymentStatus.innerText = "✓ Payment Verified (0.01 USDC)! Feed unlocked.";
-    }
     
-    currentUnlockedData = currentDataset.schema;
-    currentTxHash = "0xdc51b4810baf023cd62d5a846ee5d022517c041802c7e03c781d6add6ecce9c4";
-    
-    const previewTitle = document.getElementById("previewTitle");
-    if (previewTitle) previewTitle.innerText = "Unlocked Data Stream (HTTP 200 OK)";
-    
-    const jsonPreview = document.getElementById("jsonPreview");
-    if (jsonPreview) jsonPreview.innerText = JSON.stringify(currentUnlockedData, null, 2);
-    
-    const unlockedActions = document.getElementById("unlockedActions");
-    if (unlockedActions) unlockedActions.classList.remove("hidden");
-    
-    const apiSnippetBox = document.getElementById("apiSnippetBox");
-    if (apiSnippetBox) apiSnippetBox.classList.remove("hidden");
-    
-    const apiCurlSnippet = document.getElementById("apiCurlSnippet");
-    if (apiCurlSnippet) {
-        const workerUrl = `https://data-hub-api.izzor2021.workers.dev${currentDataset.endpoint}`;
-        apiCurlSnippet.innerText = `curl -H "x-payment-tx: ${currentTxHash}" "${workerUrl}"`;
+    if (isFullPayment) {
+        if (paymentStatus) {
+            paymentStatus.className = "status-msg success";
+            paymentStatus.innerText = "✓ Payment Verified (0.01 USDC)! Full Live Feed Unlocked.";
+        }
+        
+        currentUnlockedData = {
+            ...currentDataset.schema,
+            "access_control": {
+                "status": "unlocked_full_live_feed",
+                "payment_verified": true,
+                "tx_hash": currentTxHash || "0xdc51b4810baf023cd62d5a846ee5d022517c041802c7e03c781d6add6ecce9c4"
+            }
+        };
+        currentTxHash = currentTxHash || "0xdc51b4810baf023cd62d5a846ee5d022517c041802c7e03c781d6add6ecce9c4";
+        
+        const previewTitle = document.getElementById("previewTitle");
+        if (previewTitle) previewTitle.innerText = "Unlocked Full Data Stream (HTTP 200 OK)";
+        
+        const jsonPreview = document.getElementById("jsonPreview");
+        if (jsonPreview) jsonPreview.innerText = JSON.stringify(currentUnlockedData, null, 2);
+        
+        const unlockedActions = document.getElementById("unlockedActions");
+        if (unlockedActions) unlockedActions.classList.remove("hidden");
+        
+        const apiSnippetBox = document.getElementById("apiSnippetBox");
+        if (apiSnippetBox) apiSnippetBox.classList.remove("hidden");
+        
+        const apiCurlSnippet = document.getElementById("apiCurlSnippet");
+        if (apiCurlSnippet) {
+            const workerUrl = `https://data-hub-api.izzor2021.workers.dev${currentDataset.endpoint}`;
+            apiCurlSnippet.innerText = `curl -H "x-payment-tx: ${currentTxHash}" "${workerUrl}"`;
+        }
+    } else {
+        // Free Sample Schema Preview
+        if (paymentStatus) {
+            paymentStatus.className = "status-msg loading";
+            paymentStatus.innerText = "ℹ Sample Schema Loaded (Free). Pay 0.01 USDC to unlock full live data feed.";
+        }
+
+        const samplePreviewData = {
+            "schema_preview": currentDataset.schema,
+            "sample_access_note": "Free Schema Preview. Full live feed unlocked upon 0.01 USDC micro-payment."
+        };
+
+        const previewTitle = document.getElementById("previewTitle");
+        if (previewTitle) previewTitle.innerText = "Sample Schema Preview (Free)";
+        
+        const jsonPreview = document.getElementById("jsonPreview");
+        if (jsonPreview) jsonPreview.innerText = JSON.stringify(samplePreviewData, null, 2);
+
+        const unlockedActions = document.getElementById("unlockedActions");
+        if (unlockedActions) unlockedActions.classList.add("hidden");
+        
+        const apiSnippetBox = document.getElementById("apiSnippetBox");
+        if (apiSnippetBox) apiSnippetBox.classList.add("hidden");
     }
 };
 
 function demoInstantUnlock() {
-    window.demoInstantUnlock();
+    window.demoInstantUnlock(false); // Default to Free Sample Preview when clicking demo button
 }
 
 // Web3 Payment Handler
