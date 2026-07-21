@@ -1,0 +1,70 @@
+# x402 Data Hub - Real-Time API Datasets for AI Agents
+
+> x402 Data Hub (https://x402datahub.io) provides machine-readable, verified, real-time structured JSON datasets. It is built specifically for AI agents, RAG pipelines, and Web3 applications using the x402 HTTP Payment Protocol ($0.01 USDC per request on Arbitrum / Base).
+
+## Overview
+- **Base API URL**: `https://data-hub-api.izzor2021.workers.dev`
+- **Supported Networks**: Arbitrum One, Base
+- **Payment Token**: USDC ($0.01 per request)
+- **Payment Header**: `x-payment-tx: <TRANSACTION_HASH>`
+- **Free Tier**: 3 free requests per dataset per day for testing and low-frequency agents.
+
+## Quick Start for AI Agents
+To fetch any dataset, send an HTTP GET request to the dataset endpoint.
+
+### Free Request (No Header Required):
+```bash
+curl -s https://data-hub-api.izzor2021.workers.dev/saas/ai-api-pricing
+```
+
+### Paid Request (with x402 Payment Header):
+```bash
+curl -s -H "x-payment-tx: 0xYOUR_TRANSACTION_HASH" https://data-hub-api.izzor2021.workers.dev/saas/ai-api-pricing
+```
+
+---
+
+## Available Datasets
+
+### 1. Expat & Relocation
+- **Bali Rental Index**: `GET /expat/rent-bali`
+  - Long-term villa and apartment rental prices in Canggu, Seminyak, Ubud, Pererenan, Uluwatu.
+- **Lisbon Rental Index**: `GET /expat/rent-lisbon`
+  - Monthly rental prices in Lisbon, Porto, Lagos formatted for relocation agents.
+- **Tbilisi Rental Index**: `GET /expat/rent-tbilisi`
+  - Rental prices, safety ratings, internet speeds across Vake, Saburtalo, Sololaki.
+- **Digital Nomad Visas**: `GET /expat/nomad-visas`
+  - Income requirements, processing times, and rejection reasons for Spain, Portugal, Thailand, Bali, Georgia, etc.
+
+### 2. AI & SaaS Metrics
+- **AI API Cost Comparison**: `GET /saas/ai-api-pricing`
+  - Real-time token pricing for OpenAI (GPT-4o, GPT-4o-mini), Anthropic (Claude 3.5), Google Gemini, DeepSeek V3 per 1M tokens.
+- **LLM Response Latency Index**: `GET /ai/llm-latency`
+  - Live tracking of TTFT (time-to-first-token), throughput (tps), and uptime across major LLM providers.
+- **SaaS Free Tier Matrix**: `GET /saas/free-tier`
+  - Database of developer-friendly SaaS tools with free tiers (Supabase, Vercel, Railway, Pinecone, etc.).
+
+### 3. Finance & Crypto
+- **Crypto Fear & Greed Index**: `GET /finance/fear-greed`
+  - Market sentiment metrics, volatility index, and historical trend analysis.
+
+### 4. Tech & Remote Work
+- **Remote Tech Salary Index**: `GET /jobs/remote-salaries`
+  - Global compensation benchmarks for Senior Engineers, AI Engineers, and DevOps.
+
+### 5. Legal & Business
+- **E-Residency Comparison**: `GET /legal/eresident-comparison`
+  - Tax rates, setup costs, and banking ease for e-Residency in Estonia, Portugal, UAE, and Palau.
+
+---
+
+## Data Quality & Provenance
+Every response includes a `metadata` block containing:
+- `dataset_name`: Name of the dataset.
+- `last_updated`: ISO-8601 timestamp.
+- `sources`: List of verified primary sources (e.g., official portals, exchange APIs, on-chain data).
+- `status`: Verification status (`verified`).
+
+## Contact & Links
+- Website: https://x402datahub.io
+- GitHub: https://github.com/alexchai-dev/cloudflare-data-hub
