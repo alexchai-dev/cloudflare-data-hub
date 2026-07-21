@@ -147,14 +147,19 @@ print("Unlocked Data:", response.json())</code></pre>
                             </div>
                         </div>
 
-                        <button class="btn-pay-primary" id="web3PayBtn">
-                            <i class="fa-solid fa-wallet"></i> Pay 0.01 USDC for Full Live Feed
-                        </button>
+                        <div class="quota-badge-box" id="quotaBadgeBox">
+                            <i class="fa-solid fa-gift"></i> <span id="quotaText">Daily Free Quota: 3 / 3 Requests Remaining Today</span>
+                        </div>
+
                         <button class="btn-demo-unlock" id="demoPayBtn">
-                            <i class="fa-solid fa-eye"></i> Preview Sample Schema (Free)
+                            <i class="fa-solid fa-gift"></i> Use Free Daily Request (3 Left)
+                        </button>
+
+                        <button class="btn-pay-primary" id="web3PayBtn">
+                            <i class="fa-solid fa-wallet"></i> Pay 0.01 USDC for Unlimited Live Feed
                         </button>
                         
-                        <div class="status-msg" id="paymentStatus">Free sample schema preview available. Pay 0.01 USDC to unlock full live feed.</div>
+                        <div class="status-msg" id="paymentStatus">3 Free daily requests available. Pay 0.01 USDC for unlimited live feed.</div>
 
                         <button class="btn-download-big hidden" id="modalDlBtn">
                             <i class="fa-solid fa-download"></i> Download Unlocked .json Feed

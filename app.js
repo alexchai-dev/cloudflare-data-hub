@@ -275,6 +275,68 @@ function updateWalletUI() {
     renderCards();
 }
 
+// Daily Free Quota Tracking System
+function getDailyQuota() {
+    const today = new Date().toISOString().split('T')[0];
+    let store = JSON.parse(localStorage.getItem("datahub_daily_quota_v2") || "{}");
+    if (store.date !== today) {
+        store = { date: today, counts: {} };
+    }
+    return store;
+}
+
+function updateQuotaUI() {
+    if (!currentDataset) return;
+    const store = getDailyQuota();
+    const used = store.counts[currentDataset.id] || 0;
+    const remaining = Math.max(0, 3 - used);
+    
+    const quotaText = document.getElementById("quotaText");
+    if (quotaText) {
+        quotaText.innerText = `Daily Free Quota: ${remaining} / 3 Free Requests Remaining Today`;
+    }
+
+    const demoPayBtn = document.getElementById("demoPayBtn");
+    if (demoPayBtn) {
+        if (remaining > 0) {
+            demoPayBtn.disabled = false;
+            demoPayBtn.innerHTML = `<i class="fa-solid fa-gift"></i> Use Free Daily Request (${remaining} Left)`;
+            demoPayBtn.style.opacity = "1";
+            demoPayBtn.style.cursor = "pointer";
+        } else {
+            demoPayBtn.disabled = true;
+            demoPayBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Free Daily Quota Exhausted (3/3 Used)`;
+            demoPayBtn.style.opacity = "0.5";
+            demoPayBtn.style.cursor = "not-allowed";
+        }
+    }
+}
+
+window.useFreeDailyRequest = function() {
+    if (!currentDataset) return;
+    const store = getDailyQuota();
+    const used = store.counts[currentDataset.id] || 0;
+    
+    if (used >= 3) {
+        alert("Daily free quota (3/3) reached for this dataset today. Please connect Web3 Wallet or paste a Tx Hash to pay 0.01 USDC for unlimited access!");
+        return;
+    }
+
+    // Increment quota usage
+    store.counts[currentDataset.id] = used + 1;
+    localStorage.setItem("datahub_daily_quota_v2", JSON.stringify(store));
+    
+    currentTxHash = "0x" + Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+    updateQuotaUI();
+    window.demoInstantUnlock(true); // Unlock full live feed!
+
+    const paymentStatus = document.getElementById("paymentStatus");
+    if (paymentStatus) {
+        paymentStatus.className = "status-msg success";
+        paymentStatus.innerText = `🎁 Free Daily Request (${used + 1}/3) Applied! Full Live Feed Unlocked.`;
+    }
+};
+
 // Open Modal
 function openModal(dataset) {
     currentDataset = dataset;
@@ -308,6 +370,9 @@ function openModal(dataset) {
     const manualPayDetails = document.getElementById("manualPayDetails");
     if (manualPayDetails) manualPayDetails.classList.add("hidden");
 
+    const modalDlBtn = document.getElementById("modalDlBtn");
+    if (modalDlBtn) modalDlBtn.classList.add("hidden");
+
     const unlockedActions = document.getElementById("unlockedActions");
     if (unlockedActions) unlockedActions.classList.add("hidden");
 
@@ -317,19 +382,20 @@ function openModal(dataset) {
     const paymentStatus = document.getElementById("paymentStatus");
     if (paymentStatus) {
         paymentStatus.className = "status-msg";
-        paymentStatus.innerText = web3Wallet ? `Wallet connected (${web3Wallet.substring(0, 6)}...). Pay 0.01 USDC for full live feed or preview sample schema free.` : "Free sample schema preview available. Pay 0.01 USDC to unlock full feed.";
+        paymentStatus.innerText = web3Wallet ? `Wallet connected (${web3Wallet.substring(0, 6)}...). Use free daily request or pay 0.01 USDC.` : "3 Free daily requests available today. Pay 0.01 USDC for unlimited live feed.";
     }
 
     const web3PayBtn = document.getElementById("web3PayBtn");
     if (web3PayBtn) {
         web3PayBtn.disabled = false;
         if (web3Wallet) {
-            web3PayBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Pay ${dataset.price_usdc} USDC for Full Feed`;
+            web3PayBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Pay ${dataset.price_usdc} USDC for Unlimited Feed`;
         } else {
             web3PayBtn.innerHTML = `<i class="fa-solid fa-wallet"></i> Connect Wallet to Pay (${dataset.price_usdc} USDC)`;
         }
     }
 
+    updateQuotaUI();
     detailModal.classList.add("open");
 }
 
@@ -620,7 +686,7 @@ function setupEventListeners() {
     if (web3PayBtn) web3PayBtn.addEventListener("click", processWeb3Payment);
 
     const demoPayBtn = document.getElementById("demoPayBtn");
-    if (demoPayBtn) demoPayBtn.addEventListener("click", demoInstantUnlock);
+    if (demoPayBtn) demoPayBtn.addEventListener("click", window.useFreeDailyRequest);
 
     const netArb = document.getElementById("netArb");
     if (netArb) netArb.addEventListener("click", () => {
