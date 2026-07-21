@@ -1,0 +1,141 @@
+{
+  "metadata": {
+    "dataset_name": "Nomad Visa Processing Tracker",
+    "last_updated": "2026-07-18T18:29:41.627455Z",
+    "currency": "EUR",
+    "sources": [
+      "Expat visa trackers & databases",
+      "Consulate wait-time reports",
+      "Telegram & Facebook visa support groups",
+      "Official immigration portals (Spain UGE, Portugal AIMA, Thailand MFA)"
+    ],
+    "note": "Real-world processing times are estimated based on crowd-sourced approvals from the last 30 days.",
+    "status": "verified"
+  },
+  "visas": [
+    {
+      "country": "Spain",
+      "visa_name": "Digital Nomad Visa (DNV)",
+      "official_processing_time_days": 20,
+      "real_world_processing_time_days": {
+        "min": 15,
+        "avg": 28,
+        "max": 50
+      },
+      "estimated_rejection_rate_percent": 8.5,
+      "monthly_income_required": 2646,
+      "income_calculation_basis": "200% of the Spanish Minimum Wage (SMI) for the main applicant",
+      "top_rejection_reasons": [
+        "Incorrect formatting of the contract or employer letter (must specify remote work permission and duration).",
+        "Missing social security certificate (CoC) or proof of private social security payments.",
+        "Wrong translation or lack of apostille on criminal record certificates."
+      ],
+      "latest_consulate_reports": {
+        "london_uk": "Currently taking 35-45 days. Strict check on company existence.",
+        "washington_us": "Taking 20-30 days. Requires physical drop-off of documents.",
+        "local_application_spain": "Submitted online via UGE: averaging 25 days. Highest success rate."
+      },
+      "required_documents_summary": [
+        "Valid passport (minimum 1 year validity)",
+        "Proof of work relation (contract > 3 months old)",
+        "Company certificate showing at least 1 year of active business",
+        "Letter from employer authorizing remote work from Spain",
+        "Criminal record certificate from countries of residence in last 5 years (apostilled and translated)",
+        "Proof of sufficient income (bank statements + payslips for last 3 months)",
+        "Spanish private health insurance (no co-payments)"
+      ]
+    },
+    {
+      "country": "Portugal",
+      "visa_name": "Digital Nomad Visa / D8 (Temporary Stay & Residency)",
+      "official_processing_time_days": 90,
+      "real_world_processing_time_days": {
+        "min": 60,
+        "avg": 120,
+        "max": 180
+      },
+      "estimated_rejection_rate_percent": 12.0,
+      "monthly_income_required": 3280,
+      "income_calculation_basis": "4x Portuguese Minimum Wage (currently €820/month)",
+      "top_rejection_reasons": [
+        "Lack of 12-month lease agreement (term of lease must be registered with Portuguese Tax Authority Finanças).",
+        "Insufficient savings in a Portuguese bank account (minimum 1-year income backup recommended).",
+        "Freelancers failing to show stable recurring contract flows."
+      ],
+      "latest_consulate_reports": {
+        "san_francisco_us": "Averaging 90 days. Strict on bank account residency details.",
+        "manchester_uk": "Taking around 100 days. Require hard copies of all lease terms.",
+        "lima_peru": "Experiencing long delays (150+ days)."
+      },
+      "required_documents_summary": [
+        "NIF (Portuguese tax number)",
+        "Portuguese bank account statement showing balance",
+        "12-month registered lease agreement (Contrato de Arrendamento)",
+        "Employment contract or freelance service agreements",
+        "Proof of average monthly income for the last 3 months >= €3,280",
+        "Travel insurance with medical coverage (minimum €30,000)",
+        "Criminal background check (apostilled/legalized)"
+      ]
+    },
+    {
+      "country": "Thailand",
+      "visa_name": "Destination Thailand Visa (DTV) - Recently Launched",
+      "official_processing_time_days": 10,
+      "real_world_processing_time_days": {
+        "min": 3,
+        "avg": 7,
+        "max": 15
+      },
+      "estimated_rejection_rate_percent": 3.5,
+      "monthly_income_required": 0,
+      "income_calculation_basis": "No monthly income requirement. Requires proof of savings/funds of at least 500,000 THB (~$13,800 USD)",
+      "top_rejection_reasons": [
+        "Submitting proof of funds from a crypto wallet or unstable asset (must be a traditional bank statement in fiat currency).",
+        "Insufficient proof of remote work (freelancers must show portfolio/clients; employees need clear employer letter).",
+        "Applying from a country where you do not hold residency or a valid tourist entry stamp."
+      ],
+      "latest_consulate_reports": {
+        "vientiane_laos": "E-visa process taking 5-7 working days. Highly popular, very high approval rate.",
+        "penang_malaysia": "Taking 4-6 days. Strict on financial verification.",
+        "london_uk": "E-visa taking 10 days. Requires detailed tax documents from remote company."
+      },
+      "required_documents_summary": [
+        "Passport with at least 6 months validity",
+        "Bank statement showing at least 500,000 THB (~€13,000 / $13,800)",
+        "Employment contract or business license showing remote worker/freelancer status",
+        "Portfolio or proof of active projects (for freelancers)",
+        "If applying under 'cultural/soft power' category (Muay Thai, cooking course, medical): proof of enrollment/booking"
+      ]
+    },
+    {
+      "country": "Italy",
+      "visa_name": "Digital Nomad Visa (DNV)",
+      "official_processing_time_days": 30,
+      "real_world_processing_time_days": {
+        "min": 30,
+        "avg": 60,
+        "max": 90
+      },
+      "estimated_rejection_rate_percent": 15.0,
+      "monthly_income_required": 2700,
+      "income_calculation_basis": "3x minimum wage required for exemption from healthcare contribution (~€28,000/year)",
+      "top_rejection_reasons": [
+        "Lack of highly specialized work credentials (requires university degree or 5 years of documented experience).",
+        "Health insurance policies lacking specific coverage terms required by Italian law.",
+        "Failing to provide a signed declaration of tax compliance in Italy."
+      ],
+      "latest_consulate_reports": {
+        "new_york_us": "Very strict on the university degree requirement. Averaging 45 days.",
+        "london_uk": "Taking 60 days. Requires official translation of work contracts."
+      },
+      "required_documents_summary": [
+        "University Degree (minimum 3 years) OR proof of 5 years professional experience in the field",
+        "Employment contract or collaboration agreement for remote work",
+        "Declaration from employer confirming remote work setup",
+        "Proof of annual income >= €28,000",
+        "Proof of accommodation in Italy (lease or hospitality letter)",
+        "Comprehensive health insurance policy covering all risks (no limits)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "city": "Bali",
+    "country": "Indonesia",
+    "currency": "USD",
+    "last_updated": "2026-07-18T22:27:23.621851Z",
+    "data_source_types": [
+      "Scraped local Facebook groups",
+      "Rentalsbali / Rumah123 scraping",
+      "Expat community surveys"
+    ],
+    "note": "Prices represent monthly rent for expat-friendly villas/apartments, excluding electricity.",
+    "status": "verified"
+  },
+  "neighborhoods": [
+    {
+      "id": "canggu",
+      "name": "Canggu (Чангу)",
+      "expat_popularity_score": 9.8,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 85,
+      "english_speakers_percent": 90,
+      "description": "The digital nomad capital of Bali. Filled with cafes, coworking spaces, beach clubs, and surfers. Heavy traffic congestion.",
+      "price_distribution": {
+        "1_bedroom_villa": {
+          "min": 800,
+          "avg": 1200,
+          "max": 1800
+        },
+        "2_bedrooms_villa": {
+          "min": 1500,
+          "avg": 2200,
+          "max": 3500
+        },
+        "3_bedrooms_villa": {
+          "min": 2500,
+          "avg": 3500,
+          "max": 5500
+        }
+      }
+    },
+    {
+      "id": "ubud",
+      "name": "Ubud (Убуд)",
+      "expat_popularity_score": 9.0,
+      "safety_rating": "Very High",
+      "avg_internet_speed_mbps": 75,
+      "english_speakers_percent": 85,
+      "description": "The cultural and spiritual heart of Bali. Surrounded by rice terraces and forests. Popular for yoga, wellness, and organic food.",
+      "price_distribution": {
+        "1_bedroom_villa": {
+          "min": 600,
+          "avg": 900,
+          "max": 1400
+        },
+        "2_bedrooms_villa": {
+          "min": 1100,
+          "avg": 1600,
+          "max": 2500
+        },
+        "3_bedrooms_villa": {
+          "min": 1800,
+          "avg": 2600,
+          "max": 4000
+        }
+      }
+    },
+    {
+      "id": "seminyak",
+      "name": "Seminyak (Семиньяк)",
+      "expat_popularity_score": 8.5,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 80,
+      "english_speakers_percent": 95,
+      "description": "Upscale tourist area with luxury boutiques, high-end restaurants, and premium villas. Less of a nomad vibe, more holiday-focused.",
+      "price_distribution": {
+        "1_bedroom_villa": {
+          "min": 900,
+          "avg": 1400,
+          "max": 2000
+        },
+        "2_bedrooms_villa": {
+          "min": 1800,
+          "avg": 2600,
+          "max": 4000
+        },
+        "3_bedrooms_villa": {
+          "min": 2800,
+          "avg": 4000,
+          "max": 6500
+        }
+      }
+    },
+    {
+      "id": "uluwatu",
+      "name": "Uluwatu (Улувату)",
+      "expat_popularity_score": 8.7,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 70,
+      "english_speakers_percent": 80,
+      "description": "Cliffs, dramatic ocean views, and world-class surf spots. Popular among nomads looking for a quieter, more scenic lifestyle.",
+      "price_distribution": {
+        "1_bedroom_villa": {
+          "min": 700,
+          "avg": 1100,
+          "max": 1600
+        },
+        "2_bedrooms_villa": {
+          "min": 1300,
+          "avg": 2000,
+          "max": 3000
+        },
+        "3_bedrooms_villa": {
+          "min": 2200,
+          "avg": 3200,
+          "max": 5000
+        }
+      }
+    }
+  ]
+}

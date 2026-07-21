@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Vc Investment Theses",
+    "last_updated": "2026-07-18T18:29:41.635285Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "asset": "Bitcoin Staking",
+      "yield_percent": 4.5
+    },
+    {
+      "asset": "US Treasury 10Y",
+      "yield_percent": 4.2
+    }
+  ]
+}

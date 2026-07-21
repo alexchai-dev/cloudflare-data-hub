@@ -28,23 +28,31 @@ curl -s -H "x-payment-tx: 0xYOUR_TRANSACTION_HASH" https://data-hub-api.izzor202
 
 ### 1. Expat & Relocation
 - **Bali Rental Index**: `GET /expat/rent-bali`
-  - Long-term villa and apartment rental prices in Canggu, Seminyak, Ubud, Pererenan, Uluwatu.
+  - Long-term villa and apartment rental prices in Canggu, Seminyak, counter, etc.
 - **Lisbon Rental Index**: `GET /expat/rent-lisbon`
-  - Monthly rental prices in Lisbon, Porto, Lagos formatted for relocation agents.
+  - Monthly rental prices in Lisbon, Porto, Lagos.
 - **Tbilisi Rental Index**: `GET /expat/rent-tbilisi`
-  - Rental prices, safety ratings, internet speeds across Vake, Saburtalo, Sololaki.
+  - Rental prices, safety ratings, internet speeds across Vake, Saburtalo, Vera.
 - **Digital Nomad Visas**: `GET /expat/nomad-visas`
-  - Income requirements, processing times, and rejection reasons for Spain, Portugal, Thailand, Bali, Georgia, etc.
+  - Income requirements, processing times, and rejection reasons.
+- **Top Digital Nomad Hubs 2026**: `GET /expat/digital-nomad-hubs`
+  - Comparison of top 20 cities for nomads (wifi speed, safety, monthly cost).
 
-### 2. AI & SaaS Metrics
+### 2. AI & Tech Trends
 - **AI API Cost Comparison**: `GET /saas/ai-api-pricing`
-  - Real-time token pricing for OpenAI (GPT-4o, GPT-4o-mini), Anthropic (Claude 3.5), Google Gemini, DeepSeek V3 per 1M tokens.
+  - Real-time token pricing for OpenAI (GPT-4o), Anthropic (Claude 3.5), Gemini, DeepSeek V3 per 1M tokens.
 - **LLM Response Latency Index**: `GET /ai/llm-latency`
-  - Live tracking of TTFT (time-to-first-token), throughput (tps), and uptime across major LLM providers.
+  - Live tracking of TTFT, throughput (tps), and uptime across major LLM providers.
+- **Trending Open-Source LLMs**: `GET /ai/huggingface-top-models`
+  - Benchmarks, VRAM requirements, and context windows for top open-weight models (DeepSeek-V3, Llama 3.3, Qwen 2.5).
+- **Trending AI Agent Frameworks**: `GET /ai/github-trending-ai`
+  - Weekly top open-source AI agent frameworks, star growth rates, and primary tech stacks (elizaOS, CrewAI, LangChain).
 - **SaaS Free Tier Matrix**: `GET /saas/free-tier`
   - Database of developer-friendly SaaS tools with free tiers (Supabase, Vercel, Railway, Pinecone, etc.).
 
 ### 3. Finance & Crypto
+- **Multi-Chain Gas Tracker**: `GET /finance/gas-tracker`
+  - Real-time gas prices in Gwei and average transaction fees in USD across Ethereum, Arbitrum, Base, Polygon, Solana.
 - **Crypto Fear & Greed Index**: `GET /finance/fear-greed`
   - Market sentiment metrics, volatility index, and historical trend analysis.
 
@@ -54,7 +62,7 @@ curl -s -H "x-payment-tx: 0xYOUR_TRANSACTION_HASH" https://data-hub-api.izzor202
 
 ### 5. Legal & Business
 - **E-Residency Comparison**: `GET /legal/eresident-comparison`
-  - Tax rates, setup costs, and banking ease for e-Residency in Estonia, Portugal, UAE, and Palau.
+  - Tax rates, setup costs, and banking ease for e-Residency in Estonia, Lithuania, Dubai, and Palau.
 
 ---
 

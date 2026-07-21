@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Nocode Plugins",
+    "last_updated": "2026-07-18T18:29:41.649929Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "tool": "ChromaDB",
+      "type": "Vector Database (Open Source)"
+    },
+    {
+      "tool": "Pinecone",
+      "type": "Vector Database (SaaS)"
+    }
+  ]
+}

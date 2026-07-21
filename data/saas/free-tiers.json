@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "SaaS Free-Tier Limits Database",
+    "last_updated": "2026-07-18T18:29:41.629621Z",
+    "status": "verified"
+  },
+  "tools": [
+    {
+      "name": "Airtable",
+      "free_limit": "1,000 records per base",
+      "collaborators": "Unlimited",
+      "storage_gb": 1.0
+    },
+    {
+      "name": "Make.com",
+      "free_limit": "1,000 operations per month",
+      "scenarios": "Active up to 2",
+      "interval_min": 15
+    }
+  ]
+}

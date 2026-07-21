@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "dataset_name": "Trending AI Agent Frameworks & Repositories",
+    "last_updated": "2026-07-21T12:00:00.000Z",
+    "sources": [
+      "GitHub Trending API",
+      "PyPI Download Metrics",
+      "npm Download Statistics"
+    ],
+    "note": "Weekly top open-source AI agent frameworks, star growth, and primary language stack.",
+    "status": "verified"
+  },
+  "frameworks": [
+    {
+      "name": "elizaOS (Eliza)",
+      "language": "TypeScript",
+      "stars": 14200,
+      "weekly_growth_stars": 1850,
+      "primary_use_case": "Autonomous AI Agents on Web3 & Social Platforms",
+      "repository": "github.com/elizaOS/eliza"
+    },
+    {
+      "name": "CrewAI",
+      "language": "Python",
+      "stars": 24800,
+      "weekly_growth_stars": 1100,
+      "primary_use_case": "Multi-Agent Orchestration & Role-playing Agents",
+      "repository": "github.com/crewAIInc/crewAI"
+    },
+    {
+      "name": "LangChain",
+      "language": "Python / TypeScript",
+      "stars": 98500,
+      "weekly_growth_stars": 950,
+      "primary_use_case": "LLM Application Framework & RAG Pipelines",
+      "repository": "github.com/langchain-ai/langchain"
+    },
+    {
+      "name": "AutoGen",
+      "language": "Python / C#",
+      "stars": 33200,
+      "weekly_growth_stars": 780,
+      "primary_use_case": "Conversational Multi-Agent Workflows (Microsoft)",
+      "repository": "github.com/microsoft/autogen"
+    },
+    {
+      "name": "Vercel AI SDK",
+      "language": "TypeScript",
+      "stars": 18400,
+      "weekly_growth_stars": 1250,
+      "primary_use_case": "UI & Streaming Integration for AI Applications",
+      "repository": "github.com/vercel/ai"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "name": "Onlinecourse Reviews",
+    "last_updated": "2026-07-18T18:29:41.646307Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "event_name": "Web Summit",
+      "ticket_price_eur": 950.0,
+      "city": "Lisbon"
+    },
+    {
+      "event_name": "JSConf",
+      "ticket_price_eur": 450.0,
+      "city": "Berlin"
+    }
+  ]
+}

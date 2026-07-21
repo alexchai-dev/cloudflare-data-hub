@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Pet Relocation Customs & Rules",
+    "last_updated": "2026-07-18T18:29:41.628330Z",
+    "status": "verified"
+  },
+  "rules": [
+    {
+      "destination": "EU Countries",
+      "rabies_vaccine_required": true,
+      "microchip_required": true,
+      "waiting_period_days": 21,
+      "notes": "Requires EU Pet Passport or Health Certificate."
+    },
+    {
+      "destination": "Indonesia (Bali)",
+      "rabies_vaccine_required": true,
+      "microchip_required": true,
+      "waiting_period_days": 30,
+      "notes": "Requires import permit. Bali is technically a rabies-quarantine zone."
+    }
+  ]
+}

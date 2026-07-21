@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "name": "English-Speaking Doctors Directory",
+    "last_updated": "2026-07-18T18:29:41.628128Z",
+    "status": "verified"
+  },
+  "doctors": [
+    {
+      "name": "Dr. Luka Davies",
+      "specialty": "Pediatrician",
+      "city": "Tbilisi",
+      "languages": [
+        "English",
+        "Georgian"
+      ],
+      "contact": "+995-555-123456"
+    },
+    {
+      "name": "Dr. Ana Silva",
+      "specialty": "General Practitioner",
+      "city": "Lisbon",
+      "languages": [
+        "English",
+        "Portuguese",
+        "Spanish"
+      ],
+      "contact": "+351-912-345678"
+    }
+  ]
+}

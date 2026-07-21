@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "city": "Buenos Aires",
+    "country": "Argentina",
+    "currency": "USD",
+    "last_updated": "2026-07-18T22:27:23.621897Z",
+    "data_source_types": [
+      "Zonaprop scraping",
+      "Nomad List reports",
+      "Expat housing surveys"
+    ],
+    "note": "Prices represent monthly rent for expat-ready apartments (furnished, bills included/temporary rent).",
+    "status": "verified"
+  },
+  "neighborhoods": [
+    {
+      "id": "palermo_soho",
+      "name": "Palermo Soho (Палермо Сохо)",
+      "expat_popularity_score": 9.7,
+      "safety_rating": "Medium-High",
+      "avg_internet_speed_mbps": 100,
+      "english_speakers_percent": 85,
+      "description": "The trendy epicenter of Buenos Aires. Cobblestone streets, boutique shops, world-class steakhouses, and cafes. Very popular with nomads.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 550,
+          "avg": 750,
+          "max": 1050
+        },
+        "2_bedrooms_apt": {
+          "min": 900,
+          "avg": 1200,
+          "max": 1800
+        },
+        "3_bedrooms_apt": {
+          "min": 1400,
+          "avg": 2000,
+          "max": 3000
+        }
+      }
+    },
+    {
+      "id": "recoleta",
+      "name": "Recoleta (Реколета)",
+      "expat_popularity_score": 9.2,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 90,
+      "english_speakers_percent": 80,
+      "description": "Elegant, historic French-style neighborhood. Known for cultural spots, Recoleta cemetery, parks, and high safety rating.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 450,
+          "avg": 600,
+          "max": 850
+        },
+        "2_bedrooms_apt": {
+          "min": 750,
+          "avg": 1000,
+          "max": 1500
+        },
+        "3_bedrooms_apt": {
+          "min": 1100,
+          "avg": 1600,
+          "max": 2500
+        }
+      }
+    },
+    {
+      "id": "belgrano",
+      "name": "Belgrano (Бельграно)",
+      "expat_popularity_score": 8.8,
+      "safety_rating": "Very High",
+      "avg_internet_speed_mbps": 95,
+      "english_speakers_percent": 75,
+      "description": "Quiet, leafy residential area with excellent parks, traditional houses, and high security. Highly popular for expat families.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 400,
+          "avg": 550,
+          "max": 750
+        },
+        "2_bedrooms_apt": {
+          "min": 650,
+          "avg": 900,
+          "max": 1300
+        },
+        "3_bedrooms_apt": {
+          "min": 1000,
+          "avg": 1400,
+          "max": 2000
+        }
+      }
+    }
+  ]
+}

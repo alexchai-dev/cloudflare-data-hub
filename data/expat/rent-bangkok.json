@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "city": "Bangkok & Thailand",
+    "country": "Thailand",
+    "currency": "USD",
+    "last_updated": "2026-07-18T22:27:23.621867Z",
+    "data_source_types": [
+      "DDproperty scraping",
+      "Expat renter surveys",
+      "Real estate agency listings"
+    ],
+    "note": "Prices represent monthly rent for modern condos near BTS/MRT transit lines.",
+    "status": "verified"
+  },
+  "neighborhoods": [
+    {
+      "id": "sukhumvit",
+      "name": "Sukhumvit, Bangkok (Сукхумвит)",
+      "expat_popularity_score": 9.5,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 150,
+      "english_speakers_percent": 90,
+      "description": "The main expat corridor in Bangkok. Filled with high-rise condos, malls, nightlife, and international restaurants. Excellent BTS Skytrain access.",
+      "price_distribution": {
+        "1_bedroom_condo": {
+          "min": 450,
+          "avg": 700,
+          "max": 1100
+        },
+        "2_bedrooms_condo": {
+          "min": 800,
+          "avg": 1300,
+          "max": 2200
+        },
+        "3_bedrooms_condo": {
+          "min": 1500,
+          "avg": 2500,
+          "max": 4500
+        }
+      }
+    },
+    {
+      "id": "phuket_chalong",
+      "name": "Chalong, Phuket (Чалонг, Пхукет)",
+      "expat_popularity_score": 9.0,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 100,
+      "english_speakers_percent": 85,
+      "description": "Active expat hub in Phuket, famous for Muay Thai gyms, dive shops, and marina access. Good mix of apartments and private villas.",
+      "price_distribution": {
+        "1_bedroom_condo": {
+          "min": 350,
+          "avg": 550,
+          "max": 800
+        },
+        "2_bedrooms_villa": {
+          "min": 800,
+          "avg": 1200,
+          "max": 1800
+        },
+        "3_bedrooms_villa": {
+          "min": 1500,
+          "avg": 2200,
+          "max": 3500
+        }
+      }
+    },
+    {
+      "id": "chiang_mai_nimman",
+      "name": "Nimman, Chiang Mai (Нимман, Чиангмай)",
+      "expat_popularity_score": 9.2,
+      "safety_rating": "Very High",
+      "avg_internet_speed_mbps": 120,
+      "english_speakers_percent": 80,
+      "description": "Hipster student and nomad district in Chiang Mai. Extremely walkable, filled with cafes, co-workings, and affordable modern condos.",
+      "price_distribution": {
+        "1_bedroom_condo": {
+          "min": 300,
+          "avg": 400,
+          "max": 600
+        },
+        "2_bedrooms_condo": {
+          "min": 500,
+          "avg": 700,
+          "max": 1100
+        },
+        "3_bedrooms_condo": {
+          "min": 800,
+          "avg": 1200,
+          "max": 1800
+        }
+      }
+    }
+  ]
+}

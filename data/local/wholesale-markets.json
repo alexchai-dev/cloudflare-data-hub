@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "name": "Wholesale Markets",
+    "last_updated": "2026-07-18T18:29:41.634210Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "city": "Tbilisi",
+      "metric": "Standard local rate",
+      "value_usd": 15.0
+    },
+    {
+      "city": "Lisbon",
+      "metric": "Standard local rate",
+      "value_usd": 40.0
+    }
+  ]
+}

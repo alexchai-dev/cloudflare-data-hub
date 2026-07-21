@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "name": "Expat Community Event Aggregator",
+    "last_updated": "2026-07-18T18:29:41.628590Z",
+    "status": "verified"
+  },
+  "events": [
+    {
+      "title": "Weekly Nomad Meetup",
+      "city": "Lisbon",
+      "day": "Thursday",
+      "time": "19:00",
+      "location": "Selina Secret Garden",
+      "fee": "Free"
+    },
+    {
+      "title": "Tbilisi Expat Networking Night",
+      "city": "Tbilisi",
+      "day": "Friday",
+      "time": "20:00",
+      "location": "Fabrika",
+      "fee": "Free"
+    }
+  ]
+}

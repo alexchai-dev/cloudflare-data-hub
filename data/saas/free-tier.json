@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "name": "SaaS Free Tier Limits Matrix",
+    "price_usdc": "0.01",
+    "last_updated": "2026-07-19T14:40:00Z",
+    "status": "verified"
+  },
+  "services": [
+    {
+      "name": "Supabase",
+      "free_limit_db_size_mb": 500,
+      "free_limit_edge_functions": 10,
+      "free_limit_monthly_active_users": 50000,
+      "overage_costs": "Pro plan starts at $25/month"
+    },
+    {
+      "name": "Vercel",
+      "free_limit_bandwidth_gb": 100,
+      "free_limit_serverless_execution_gb_hours": 100,
+      "free_limit_build_minutes": 6000,
+      "overage_costs": "$40 per 100GB extra bandwidth"
+    },
+    {
+      "name": "Neon DB",
+      "free_limit_compute_hours": 190,
+      "free_limit_storage_gb": 3,
+      "free_limit_projects": 1,
+      "overage_costs": "Scale starts at $19/month"
+    },
+    {
+      "name": "Clerk",
+      "free_limit_monthly_active_users": 10000,
+      "free_limit_sso_connections": 3,
+      "overage_costs": "$0.02 per extra MAU"
+    }
+  ]
+}

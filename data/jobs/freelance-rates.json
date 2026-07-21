@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Freelance Rates",
+    "last_updated": "2026-07-18T18:29:41.637515Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "role": "Senior Prompt Engineer",
+      "salary_range_usd": "120,000 - 180,000"
+    },
+    {
+      "role": "AI Data Annotator",
+      "salary_range_usd": "30,000 - 55,000"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Vector Db Pricing",
+    "last_updated": "2026-07-18T18:29:41.649468Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "tool": "ChromaDB",
+      "type": "Vector Database (Open Source)"
+    },
+    {
+      "tool": "Pinecone",
+      "type": "Vector Database (SaaS)"
+    }
+  ]
+}

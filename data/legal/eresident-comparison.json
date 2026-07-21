@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "name": "Eresident Comparison",
+    "last_updated": "2026-07-18T18:29:41.643049Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "jurisdiction": "Estonia",
+      "eresidency_cost_eur": 120.0,
+      "tax_rate_percent": 20.0
+    },
+    {
+      "jurisdiction": "Dubai (Freezone)",
+      "eresidency_cost_eur": 5500.0,
+      "tax_rate_percent": 9.0
+    }
+  ]
+}

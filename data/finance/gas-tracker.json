@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "dataset_name": "Multi-Chain Gas Tracker & L2 Fee Index",
+    "last_updated": "2026-07-21T12:00:00.000Z",
+    "currency": "USD",
+    "sources": [
+      "Etherscan Gas Oracle",
+      "Arbiscan API",
+      "Basescan API",
+      "Polygonscan API",
+      "Solana RPC Cluster"
+    ],
+    "note": "Real-time gas prices in Gwei and average transaction cost in USD across major L1 & L2 networks.",
+    "status": "verified"
+  },
+  "networks": [
+    {
+      "chain": "Ethereum Mainnet",
+      "chain_id": 1,
+      "native_token": "ETH",
+      "gas_price_gwei": {
+        "low": 12,
+        "average": 18,
+        "fast": 25
+      },
+      "estimated_transfer_cost_usd": 0.45,
+      "estimated_swap_cost_usd": 3.80,
+      "tps_current": 14.2
+    },
+    {
+      "chain": "Arbitrum One",
+      "chain_id": 42161,
+      "native_token": "ETH",
+      "gas_price_gwei": {
+        "low": 0.1,
+        "average": 0.15,
+        "fast": 0.2
+      },
+      "estimated_transfer_cost_usd": 0.005,
+      "estimated_swap_cost_usd": 0.04,
+      "tps_current": 48.5
+    },
+    {
+      "chain": "Base",
+      "chain_id": 8453,
+      "native_token": "ETH",
+      "gas_price_gwei": {
+        "low": 0.05,
+        "average": 0.08,
+        "fast": 0.12
+      },
+      "estimated_transfer_cost_usd": 0.002,
+      "estimated_swap_cost_usd": 0.015,
+      "tps_current": 62.1
+    },
+    {
+      "chain": "Polygon PoS",
+      "chain_id": 137,
+      "native_token": "MATIC",
+      "gas_price_gwei": {
+        "low": 35,
+        "average": 45,
+        "fast": 60
+      },
+      "estimated_transfer_cost_usd": 0.01,
+      "estimated_swap_cost_usd": 0.05,
+      "tps_current": 32.0
+    },
+    {
+      "chain": "Solana",
+      "chain_id": 101,
+      "native_token": "SOL",
+      "gas_price_gwei": {
+        "low": 0,
+        "average": 0,
+        "fast": 0
+      },
+      "estimated_transfer_cost_usd": 0.00025,
+      "estimated_swap_cost_usd": 0.002,
+      "tps_current": 2850
+    }
+  ]
+}

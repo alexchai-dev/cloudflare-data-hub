@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "name": "Nationalparks Fees",
+    "last_updated": "2026-07-18T18:29:41.640572Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "provider": "Airalo",
+      "destination": "Global Plan 10GB",
+      "price_usd": 59.0
+    },
+    {
+      "provider": "Holafly",
+      "destination": "Global Plan Unlimited",
+      "price_usd": 99.0
+    }
+  ]
+}

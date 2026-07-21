@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "name": "LLM Response Latency Index",
+    "price_usdc": "0.02",
+    "last_updated": "2026-07-19T14:40:00Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "model_id": "openai/gpt-4o",
+      "display_name": "OpenAI GPT-4o",
+      "avg_latency_ms": 1150,
+      "tokens_per_second": 82,
+      "uptime_percent": 99.98
+    },
+    {
+      "model_id": "anthropic/claude-3-5-sonnet",
+      "display_name": "Claude 3.5 Sonnet",
+      "avg_latency_ms": 1420,
+      "tokens_per_second": 71,
+      "uptime_percent": 99.95
+    },
+    {
+      "model_id": "google/gemini-1.5-pro",
+      "display_name": "Gemini 1.5 Pro",
+      "avg_latency_ms": 1580,
+      "tokens_per_second": 65,
+      "uptime_percent": 99.91
+    },
+    {
+      "model_id": "deepseek/deepseek-chat",
+      "display_name": "DeepSeek V3 (Chat)",
+      "avg_latency_ms": 1850,
+      "tokens_per_second": 55,
+      "uptime_percent": 99.87
+    }
+  ]
+}

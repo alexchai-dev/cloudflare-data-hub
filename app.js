@@ -158,6 +158,62 @@ const datasets = [
             "metadata": { "name": "E-Residency Programs Index", "last_updated": "2026-07-20T12:00:00Z" },
             "data": [ { "jurisdiction": "Estonia", "eresidency_cost_eur": 120.0, "tax_rate_percent": 20.0 } ]
         }
+    },
+    {
+        id: "gas-tracker",
+        title: "Multi-Chain Gas Tracker",
+        category: "finance",
+        categoryName: "Finance & Crypto",
+        endpoint: "/finance/gas-tracker",
+        description: "Real-time gas prices in Gwei and average transaction fees in USD across Ethereum, Arbitrum, Base, Polygon, and Solana.",
+        price: "0.01 USDC",
+        price_usdc: 0.01,
+        schema: {
+            "metadata": { "dataset_name": "Multi-Chain Gas Tracker & L2 Fee Index", "last_updated": "2026-07-21T12:00:00Z" },
+            "networks": [ { "chain": "Arbitrum One", "gas_price_gwei": { "average": 0.15 }, "estimated_swap_cost_usd": 0.04 } ]
+        }
+    },
+    {
+        id: "huggingface-top-models",
+        title: "Trending Open-Source LLMs",
+        category: "ai",
+        categoryName: "AI & ML",
+        endpoint: "/ai/huggingface-top-models",
+        description: "Benchmarks, VRAM requirements, and context windows for top open-weight models (DeepSeek-V3, Llama 3.3, Qwen 2.5).",
+        price: "0.01 USDC",
+        price_usdc: 0.01,
+        schema: {
+            "metadata": { "dataset_name": "Trending Open-Source LLMs", "last_updated": "2026-07-21T12:00:00Z" },
+            "models": [ { "name": "DeepSeek-V3", "parameters": "671B (37B active)", "context_window": 128000, "min_vram_gb": 160 } ]
+        }
+    },
+    {
+        id: "digital-nomad-hubs",
+        title: "Top Digital Nomad Hubs 2026",
+        category: "expat",
+        categoryName: "Expat & Living",
+        endpoint: "/expat/digital-nomad-hubs",
+        description: "Comprehensive comparison of top digital nomad cities including wifi speed, safety, cost of living, and visa ease.",
+        price: "0.01 USDC",
+        price_usdc: 0.01,
+        schema: {
+            "metadata": { "dataset_name": "Top Global Digital Nomad Hubs Index", "last_updated": "2026-07-21T12:00:00Z" },
+            "hubs": [ { "city": "Canggu", "country": "Indonesia", "avg_cost_monthly_usd": 1250, "avg_wifi_mbps": 85 } ]
+        }
+    },
+    {
+        id: "github-trending-ai",
+        title: "Trending AI Agent Frameworks",
+        category: "ai",
+        categoryName: "AI & ML",
+        endpoint: "/ai/github-trending-ai",
+        description: "Weekly top open-source AI agent frameworks, star growth rates, and primary tech stacks (elizaOS, CrewAI, LangChain, AutoGen).",
+        price: "0.01 USDC",
+        price_usdc: 0.01,
+        schema: {
+            "metadata": { "dataset_name": "Trending AI Agent Frameworks & Repositories", "last_updated": "2026-07-21T12:00:00Z" },
+            "frameworks": [ { "name": "elizaOS", "language": "TypeScript", "stars": 14200, "weekly_growth_stars": 1850 } ]
+        }
     }
 ];
 

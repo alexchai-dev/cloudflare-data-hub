@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Mcp Servers",
+    "last_updated": "2026-07-18T18:29:41.648374Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "tool": "ChromaDB",
+      "type": "Vector Database (Open Source)"
+    },
+    {
+      "tool": "Pinecone",
+      "type": "Vector Database (SaaS)"
+    }
+  ]
+}

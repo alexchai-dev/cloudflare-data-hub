@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "city": "Lisbon & Portugal",
+    "country": "Portugal",
+    "currency": "EUR",
+    "last_updated": "2026-07-18T22:27:23.621880Z",
+    "data_source_types": [
+      "Idealista scraping",
+      "Local AIMA expat reports",
+      "Facebook rental groups"
+    ],
+    "note": "Prices represent monthly rent for apartments in central zones, registered contracts.",
+    "status": "verified"
+  },
+  "neighborhoods": [
+    {
+      "id": "santo_antonio",
+      "name": "Santo Antonio, Lisbon (Санту-Антониу)",
+      "expat_popularity_score": 9.3,
+      "safety_rating": "Very High",
+      "avg_internet_speed_mbps": 200,
+      "english_speakers_percent": 90,
+      "description": "Prestigious district surrounding Avenida da Liberdade. High-end shopping, embassies, luxury apartments. Very safe and central.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 1200,
+          "avg": 1600,
+          "max": 2200
+        },
+        "2_bedrooms_apt": {
+          "min": 1800,
+          "avg": 2500,
+          "max": 3800
+        },
+        "3_bedrooms_apt": {
+          "min": 2800,
+          "avg": 4000,
+          "max": 6000
+        }
+      }
+    },
+    {
+      "id": "porto_bonfim",
+      "name": "Bonfim, Porto (Бонфим, Порту)",
+      "expat_popularity_score": 8.8,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 150,
+      "english_speakers_percent": 80,
+      "description": "Bohemian, artistic, and trendy neighborhood in Porto. Popular with younger expats, designers, and nomads. Walkable and cheaper than Lisbon.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 800,
+          "avg": 1100,
+          "max": 1500
+        },
+        "2_bedrooms_apt": {
+          "min": 1300,
+          "avg": 1700,
+          "max": 2400
+        },
+        "3_bedrooms_apt": {
+          "min": 1900,
+          "avg": 2500,
+          "max": 3500
+        }
+      }
+    },
+    {
+      "id": "algarve_lagos",
+      "name": "Lagos, Algarve (Лагуш, Алгарве)",
+      "expat_popularity_score": 9.0,
+      "safety_rating": "Very High",
+      "avg_internet_speed_mbps": 100,
+      "english_speakers_percent": 95,
+      "description": "Beautiful coastal town in the Algarve. Known for cliffs, beaches, and a vibrant community of digital nomads and retirees. High summer tourist crowds.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 800,
+          "avg": 1000,
+          "max": 1400
+        },
+        "2_bedrooms_apt": {
+          "min": 1200,
+          "avg": 1600,
+          "max": 2200
+        },
+        "3_bedrooms_apt": {
+          "min": 1800,
+          "avg": 2400,
+          "max": 3500
+        }
+      }
+    }
+  ]
+}

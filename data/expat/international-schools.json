@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "name": "International School Fees",
+    "last_updated": "2026-07-18T18:29:41.628995Z",
+    "currency": "EUR",
+    "status": "verified"
+  },
+  "schools": [
+    {
+      "name": "Carlucci American International School",
+      "city": "Lisbon",
+      "tuition_annual_min": 10000,
+      "tuition_annual_max": 22000,
+      "curriculum": "US / IB"
+    },
+    {
+      "name": "QSI International School",
+      "city": "Tbilisi",
+      "tuition_annual_min": 12000,
+      "tuition_annual_max": 25000,
+      "curriculum": "US"
+    }
+  ]
+}

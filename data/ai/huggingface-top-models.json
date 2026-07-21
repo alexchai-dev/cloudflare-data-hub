@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "dataset_name": "Trending Open-Source LLMs & VRAM Requirements",
+    "last_updated": "2026-07-21T12:00:00.000Z",
+    "sources": [
+      "Hugging Face Open LLM Leaderboard",
+      "LM Eval Harness",
+      "LMSYS Chatbot Arena"
+    ],
+    "note": "Benchmarks, VRAM requirements, and context windows for top open-weight models.",
+    "status": "verified"
+  },
+  "models": [
+    {
+      "name": "DeepSeek-V3",
+      "developer": "DeepSeek",
+      "parameters": "671B (37B active)",
+      "architecture": "MoE",
+      "context_window": 128000,
+      "min_vram_gb": 160,
+      "license": "MIT",
+      "benchmark_scores": {
+        "mmlu": 88.5,
+        "human_eval": 82.6,
+        "gsm8k": 91.6
+      },
+      "use_case": "Code generation, reasoning, general chat"
+    },
+    {
+      "name": "Llama-3.3-70B-Instruct",
+      "developer": "Meta",
+      "parameters": "70B",
+      "architecture": "Dense",
+      "context_window": 128000,
+      "min_vram_gb": 48,
+      "license": "Llama 3.3 Community",
+      "benchmark_scores": {
+        "mmlu": 86.4,
+        "human_eval": 81.1,
+        "gsm8k": 89.2
+      },
+      "use_case": "General purpose, instruction following, enterprise agentic workflows"
+    },
+    {
+      "name": "Qwen2.5-Coder-32B-Instruct",
+      "developer": "Alibaba Cloud",
+      "parameters": "32B",
+      "architecture": "Dense",
+      "context_window": 131072,
+      "min_vram_gb": 24,
+      "license": "Apache-2.0",
+      "benchmark_scores": {
+        "mmlu": 79.8,
+        "human_eval": 86.6,
+        "gsm8k": 85.0
+      },
+      "use_case": "Best open-source coding & repository-level code assistant"
+    },
+    {
+      "name": "Mistral-Small-2402",
+      "developer": "Mistral AI",
+      "parameters": "24B",
+      "architecture": "Dense",
+      "context_window": 32768,
+      "min_vram_gb": 16,
+      "license": "Apache-2.0",
+      "benchmark_scores": {
+        "mmlu": 78.2,
+        "human_eval": 72.4,
+        "gsm8k": 82.1
+      },
+      "use_case": "Lightweight local deployment, fast inference, edge computing"
+    }
+  ]
+}

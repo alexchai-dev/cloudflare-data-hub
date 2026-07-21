@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "dataset_name": "Top Global Digital Nomad Hubs Index",
+    "last_updated": "2026-07-21T12:00:00.000Z",
+    "currency": "USD",
+    "sources": [
+      "NomadList Public Aggregates",
+      "Speedtest Ookla Global Index",
+      "Numbeo Cost of Living Index"
+    ],
+    "note": "Comprehensive comparison of top digital nomad cities including wifi speed, safety, cost of living, and visa ease.",
+    "status": "verified"
+  },
+  "hubs": [
+    {
+      "rank": 1,
+      "city": "Canggu / Chiang Mai",
+      "country": "Indonesia / Thailand",
+      "avg_cost_monthly_usd": 1250,
+      "avg_wifi_mbps": 85,
+      "safety_score_10": 8.4,
+      "visa_friendly_rating": "High",
+      "coworking_spaces_count": 45,
+      "best_months": "Nov - Apr"
+    },
+    {
+      "rank": 2,
+      "city": "Lisbon",
+      "country": "Portugal",
+      "avg_cost_monthly_usd": 2400,
+      "avg_wifi_mbps": 180,
+      "safety_score_10": 9.1,
+      "visa_friendly_rating": "Very High (D8 Visa)",
+      "coworking_spaces_count": 60,
+      "best_months": "May - Oct"
+    },
+    {
+      "rank": 3,
+      "city": "Tbilisi",
+      "country": "Georgia",
+      "avg_cost_monthly_usd": 1100,
+      "avg_wifi_mbps": 110,
+      "safety_score_10": 9.3,
+      "visa_friendly_rating": "Ultra High (1 Year Visa-Free)",
+      "coworking_spaces_count": 30,
+      "best_months": "May - Oct"
+    },
+    {
+      "rank": 4,
+      "city": "Bansko",
+      "country": "Bulgaria",
+      "avg_cost_monthly_usd": 950,
+      "avg_wifi_mbps": 120,
+      "safety_score_10": 8.8,
+      "visa_friendly_rating": "High (Schengen Zone)",
+      "coworking_spaces_count": 12,
+      "best_months": "Dec - Mar (Ski), Jun - Sep (Mountain)"
+    },
+    {
+      "rank": 5,
+      "city": "Buenos Aires",
+      "country": "Argentina",
+      "avg_cost_monthly_usd": 1050,
+      "avg_wifi_mbps": 95,
+      "safety_score_10": 7.2,
+      "visa_friendly_rating": "High (Rentista / DNV)",
+      "coworking_spaces_count": 40,
+      "best_months": "Oct - Apr"
+    }
+  ]
+}

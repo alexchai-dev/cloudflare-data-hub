@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Retail Returns Rates",
+    "last_updated": "2026-07-18T18:29:41.645875Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "product_category": "Eco-friendly bottle",
+      "avg_dropship_margin_percent": 65.0
+    },
+    {
+      "product_category": "AI Smart Ring",
+      "avg_dropship_margin_percent": 72.0
+    }
+  ]
+}

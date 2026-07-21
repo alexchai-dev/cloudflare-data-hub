@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Bureaucracy Checklists (Step-by-Step)",
+    "last_updated": "2026-07-18T18:29:41.629182Z",
+    "status": "verified"
+  },
+  "checklists": {
+    "spain_nie": [
+      "Book appointment (Cita Previa)",
+      "Fill Form EX-15",
+      "Pay Tax Form 790 012",
+      "Submit at police station",
+      "Receive NIE number"
+    ],
+    "portugal_nif": [
+      "Find a fiscal representative",
+      "Submit passport and proof of address",
+      "Pay NIF fee",
+      "Receive NIF number"
+    ]
+  }
+}

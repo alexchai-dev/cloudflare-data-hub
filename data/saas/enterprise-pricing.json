@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Enterprise SaaS Price Sheets",
+    "last_updated": "2026-07-18T18:29:41.629834Z",
+    "status": "verified"
+  },
+  "pricing": [
+    {
+      "name": "HubSpot",
+      "tier": "Enterprise Suite",
+      "quoted_price_monthly_usd": 3600.0,
+      "seats_included": 10,
+      "billing": "Annual"
+    },
+    {
+      "name": "Salesforce",
+      "tier": "Unlimited",
+      "quoted_price_monthly_usd": 300.0,
+      "seats_included": 1,
+      "billing": "Annual"
+    }
+  ]
+}

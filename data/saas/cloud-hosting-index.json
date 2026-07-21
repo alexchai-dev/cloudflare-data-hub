@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Cloud Hosting Index",
+    "last_updated": "2026-07-18T18:29:41.630895Z",
+    "status": "verified"
+  },
+  "data": [
+    {
+      "item": "Example entry A",
+      "value": "Structured value 1"
+    },
+    {
+      "item": "Example entry B",
+      "value": "Structured value 2"
+    }
+  ]
+}

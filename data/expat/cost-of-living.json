@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "name": "Expat Cost-of-Living Micro-Metrics",
+    "last_updated": "2026-07-18T18:29:41.627902Z",
+    "currency": "USD",
+    "status": "verified"
+  },
+  "items": [
+    {
+      "category": "Food",
+      "item": "Capuccino in expat cafe",
+      "tbilisi": 3.0,
+      "belgrade": 2.5,
+      "lisbon": 3.5,
+      "bali": 2.8
+    },
+    {
+      "category": "Fitness",
+      "item": "Monthly gym membership (English speaking)",
+      "tbilisi": 60.0,
+      "belgrade": 45.0,
+      "lisbon": 70.0,
+      "bali": 50.0
+    },
+    {
+      "category": "Work",
+      "item": "Coworking hot desk monthly",
+      "tbilisi": 180.0,
+      "belgrade": 150.0,
+      "lisbon": 250.0,
+      "bali": 200.0
+    }
+  ]
+}

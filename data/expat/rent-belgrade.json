@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "city": "Belgrade",
+    "country": "Serbia",
+    "currency": "EUR",
+    "last_updated": "2026-07-18T22:27:23.621889Z",
+    "data_source_types": [
+      "Halo oglasi scraping",
+      "Expat surveys",
+      "City-expert records"
+    ],
+    "note": "Prices represent monthly rent for modern renovated apartments in Belgrade and Novi Sad.",
+    "status": "verified"
+  },
+  "neighborhoods": [
+    {
+      "id": "stari_grad",
+      "name": "Stari Grad, Belgrade (Стари Град)",
+      "expat_popularity_score": 9.2,
+      "safety_rating": "High",
+      "avg_internet_speed_mbps": 120,
+      "english_speakers_percent": 85,
+      "description": "The historical heart of Belgrade. Walkable, full of cafes, bars, and historic pedestrian streets (Knez Mihailova). Hilly terrain, older building stock.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 500,
+          "avg": 700,
+          "max": 1000
+        },
+        "2_bedrooms_apt": {
+          "min": 850,
+          "avg": 1200,
+          "max": 1800
+        },
+        "3_bedrooms_apt": {
+          "min": 1300,
+          "avg": 1800,
+          "max": 2800
+        }
+      }
+    },
+    {
+      "id": "novi_beograd",
+      "name": "Novi Beograd, Belgrade (Новый Белград)",
+      "expat_popularity_score": 8.7,
+      "safety_rating": "Very High",
+      "avg_internet_speed_mbps": 150,
+      "english_speakers_percent": 80,
+      "description": "Modern business district across the Sava river. Flat terrain, wide avenues, new high-rise residential blocks. Great infrastructure and parking.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 450,
+          "avg": 650,
+          "max": 900
+        },
+        "2_bedrooms_apt": {
+          "min": 800,
+          "avg": 1100,
+          "max": 1600
+        },
+        "3_bedrooms_apt": {
+          "min": 1200,
+          "avg": 1600,
+          "max": 2500
+        }
+      }
+    },
+    {
+      "id": "novi_sad_liman",
+      "name": "Liman, Novi Sad (Лиман, Нови-Сад)",
+      "expat_popularity_score": 8.5,
+      "safety_rating": "Very High",
+      "avg_internet_speed_mbps": 100,
+      "english_speakers_percent": 75,
+      "description": "Green residential area in Novi Sad next to the Danube river. Very quiet, bike-friendly, close to the university and Štrand beach.",
+      "price_distribution": {
+        "1_bedroom_apt": {
+          "min": 300,
+          "avg": 400,
+          "max": 550
+        },
+        "2_bedrooms_apt": {
+          "min": 500,
+          "avg": 650,
+          "max": 900
+        },
+        "3_bedrooms_apt": {
+          "min": 750,
+          "avg": 1000,
+          "max": 1400
+        }
+      }
+    }
+  ]
+}

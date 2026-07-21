@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "dataset_name": "AI API Cost Comparison",
+    "last_updated": "2026-07-18T18:29:41.619373Z",
+    "currency": "USD",
+    "source": "OpenRouter API (Live feed)",
+    "note": "Prices represent cost in USD per 1 million tokens."
+  },
+  "models": [
+    {
+      "model_id": "openai/gpt-4o-mini",
+      "display_name": "OpenAI GPT-4o Mini",
+      "input_cost_per_1m_tokens_usd": 0.15,
+      "output_cost_per_1m_tokens_usd": 0.6,
+      "context_window_tokens": 128000
+    },
+    {
+      "model_id": "deepseek/deepseek-chat",
+      "display_name": "DeepSeek V3 (Chat)",
+      "input_cost_per_1m_tokens_usd": 0.2002,
+      "output_cost_per_1m_tokens_usd": 0.8001,
+      "context_window_tokens": 131072
+    },
+    {
+      "model_id": "anthropic/claude-3-haiku",
+      "display_name": "Anthropic Claude 3 Haiku",
+      "input_cost_per_1m_tokens_usd": 0.25,
+      "output_cost_per_1m_tokens_usd": 1.25,
+      "context_window_tokens": 200000
+    },
+    {
+      "model_id": "mistralai/mixtral-8x22b-instruct",
+      "display_name": "Mistral Mixtral 8x22B",
+      "input_cost_per_1m_tokens_usd": 2.0,
+      "output_cost_per_1m_tokens_usd": 6.0,
+      "context_window_tokens": 65536
+    },
+    {
+      "model_id": "openai/gpt-4o",
+      "display_name": "OpenAI GPT-4o",
+      "input_cost_per_1m_tokens_usd": 2.5,
+      "output_cost_per_1m_tokens_usd": 10.0,
+      "context_window_tokens": 128000
+    }
+  ]
+}

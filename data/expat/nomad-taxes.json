@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "Digital Nomad Tax-Friendliness Scores",
+    "last_updated": "2026-07-18T18:29:41.628802Z",
+    "status": "verified"
+  },
+  "countries": [
+    {
+      "country": "Croatia",
+      "nomad_tax_rate_percent": 0.0,
+      "tax_exemption_period": "12 months",
+      "residency_required": false
+    },
+    {
+      "country": "Greece",
+      "nomad_tax_rate_percent": 22.0,
+      "tax_exemption_period": "50% reduction for 7 years",
+      "residency_required": true
+    }
+  ]
+}

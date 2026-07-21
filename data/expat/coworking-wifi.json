@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Coworking Spaces WiFi Speed Index",
+    "last_updated": "2026-07-18T18:29:41.629368Z",
+    "status": "verified"
+  },
+  "spaces": [
+    {
+      "name": "Lande",
+      "city": "Tbilisi",
+      "download_mbps": 150,
+      "upload_mbps": 120,
+      "has_backup_starlink": false
+    },
+    {
+      "name": "Second Home",
+      "city": "Lisbon",
+      "download_mbps": 300,
+      "upload_mbps": 250,
+      "has_backup_starlink": true
+    }
+  ]
+}
