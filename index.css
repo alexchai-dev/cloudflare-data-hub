@@ -612,40 +612,48 @@ body {
 
 .btn-demo-unlock {
     width: 100%;
-    padding: 0.65rem 1rem;
+    padding: 0.75rem 1rem;
     border-radius: 8px;
     font-weight: 600;
     font-size: 0.85rem;
-    color: var(--accent-emerald);
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #a7f3d0;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    justify-content: space-between;
     transition: all 0.2s ease;
+    margin-bottom: 0.75rem;
 }
 
-.btn-demo-unlock:hover {
+.btn-demo-unlock:hover:not(:disabled) {
     background: rgba(16, 185, 129, 0.25);
     border-color: var(--accent-emerald);
     color: #fff;
 }
 
-.quota-badge-box {
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    color: #a7f3d0;
-    padding: 0.5rem 0.8rem;
-    border-radius: 8px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 0.8rem;
+.btn-demo-unlock:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+}
+
+.quota-badge {
+    background: rgba(16, 185, 129, 0.25);
+    color: #6ee7b7;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.quota-badge-used {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
 }
 
 .status-msg {

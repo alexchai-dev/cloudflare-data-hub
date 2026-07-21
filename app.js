@@ -290,24 +290,15 @@ function updateQuotaUI() {
     const store = getDailyQuota();
     const used = store.counts[currentDataset.id] || 0;
     const remaining = Math.max(0, 3 - used);
-    
-    const quotaText = document.getElementById("quotaText");
-    if (quotaText) {
-        quotaText.innerText = `Daily Free Quota: ${remaining} / 3 Free Requests Remaining Today`;
-    }
 
     const demoPayBtn = document.getElementById("demoPayBtn");
     if (demoPayBtn) {
         if (remaining > 0) {
             demoPayBtn.disabled = false;
-            demoPayBtn.innerHTML = `<i class="fa-solid fa-gift"></i> Use Free Daily Request (${remaining} Left)`;
-            demoPayBtn.style.opacity = "1";
-            demoPayBtn.style.cursor = "pointer";
+            demoPayBtn.innerHTML = `<span><i class="fa-solid fa-gift"></i> Use Free Daily Request</span><span class="quota-badge">${remaining} / 3 Left</span>`;
         } else {
             demoPayBtn.disabled = true;
-            demoPayBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Free Daily Quota Exhausted (3/3 Used)`;
-            demoPayBtn.style.opacity = "0.5";
-            demoPayBtn.style.cursor = "not-allowed";
+            demoPayBtn.innerHTML = `<span><i class="fa-solid fa-lock"></i> Free Quota Exhausted</span><span class="quota-badge quota-badge-used">0 / 3 Left</span>`;
         }
     }
 }
