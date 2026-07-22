@@ -6,6 +6,8 @@ var currentUnlockedData = null;
 var currentTxHash = null;
 var activeCategory = "all";
 var searchQuery = "";
+var selectedSnippetLang = "curl";
+var selectedDocLang = "curl";
 
 // 9 Real Featured Datasets
 const datasets = [
@@ -224,6 +226,24 @@ const USDC_CONTRACTS = {
 
 const MERCHANT_WALLET = "0xB23B0d7d25113E991D2931Ca147677A5b5Da40E4";
 
+// Code Snippet Generator
+function generateSnippet(endpoint, lang = "curl", txHash = "") {
+    const baseUrl = `https://data-hub-api.izzor2021.workers.dev${endpoint}`;
+    if (lang === "python") {
+        return txHash
+            ? `import requests\n\nurl = "${baseUrl}"\nheaders = {"x-payment-tx": "${txHash}"}\nresponse = requests.get(url, headers=headers)\nprint(response.json())`
+            : `import requests\n\nurl = "${baseUrl}"\nresponse = requests.get(url)\nprint(response.json())`;
+    } else if (lang === "js") {
+        return txHash
+            ? `const res = await fetch("${baseUrl}", {\n  headers: { "x-payment-tx": "${txHash}" }\n});\nconst data = await res.json();\nconsole.log(data);`
+            : `const res = await fetch("${baseUrl}");\nconst data = await res.json();\nconsole.log(data);`;
+    }
+    // Default cURL
+    return txHash 
+        ? `curl -s -H "x-payment-tx: ${txHash}" "${baseUrl}"`
+        : `curl -s "${baseUrl}"`;
+}
+
 // Render Grid Cards
 function renderCards() {
     const catalogGrid = document.getElementById("catalogGrid");
@@ -253,7 +273,7 @@ function renderCards() {
         const card = document.createElement("div");
         card.className = "card item-card";
         
-        const buttonText = web3Wallet ? `<i class="fa-solid fa-bolt"></i> Unlock Data (${d.price})` : `<i class="fa-solid fa-wallet"></i> Connect / Unlock Data`;
+        const buttonText = web3Wallet ? `<i class="fa-solid fa-wallet"></i> Pay ${d.price}` : `<i class="fa-solid fa-lock"></i> Details / Web3 Pay`;
         const btnClass = web3Wallet ? "card-wallet-btn btn-connected" : "card-wallet-btn";
 
         card.innerHTML = `
@@ -264,12 +284,27 @@ function renderCards() {
                 <span class="endpoint-text"><code>GET ${d.endpoint}</code></span>
                 <span class="price-tag">${d.price}</span>
             </div>
-            <button class="${btnClass}">
-                ${buttonText}
-            </button>
+            <div class="card-btn-group">
+                <button class="card-try-btn" data-id="${d.id}">
+                    <i class="fa-solid fa-bolt"></i> Try Live
+                </button>
+                <button class="${btnClass}">
+                    ${buttonText}
+                </button>
+            </div>
         `;
         
-        card.addEventListener("click", (e) => {
+        // "Try Live" button opens modal and fires instant live fetch!
+        const tryBtn = card.querySelector(".card-try-btn");
+        if (tryBtn) {
+            tryBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openModal(d);
+                window.fetchLiveData();
+            });
+        }
+
+        card.addEventListener("click", () => {
             openModal(d);
         });
 
@@ -289,7 +324,7 @@ window.connectGlobalWallet = async function() {
     }
 
     if (!window.ethereum) {
-        alert("MetaMask / EVM Wallet extension was not detected. You can test unlocking feeds instantly using the '⚡ Instant Demo Unlock' button inside any dataset modal!");
+        alert("MetaMask / EVM Wallet extension was not detected. You can test unlocking feeds instantly using the '⚡ Fetch Live Data' button inside any dataset modal!");
         return;
     }
 
@@ -297,7 +332,6 @@ window.connectGlobalWallet = async function() {
         const navBtnText = document.getElementById("navWalletText");
         if (navBtnText) navBtnText.innerText = "Connecting...";
         
-        // Handle provider selection if Rabby / MetaMask conflict exists
         let provider = window.ethereum;
         if (window.ethereum.providers && window.ethereum.providers.length) {
             provider = window.ethereum.providers.find(p => p.isMetaMask) || window.ethereum.providers[0];
@@ -331,10 +365,10 @@ function updateWalletUI() {
     renderCards();
 }
 
-// Daily Free Quota Tracking System
+// Daily Free Quota Tracking System (50 requests/day limit)
 function getDailyQuota() {
     const today = new Date().toISOString().split('T')[0];
-    let store = JSON.parse(localStorage.getItem("datahub_daily_quota_v2") || "{}");
+    let store = JSON.parse(localStorage.getItem("datahub_daily_quota_v3") || "{}");
     if (store.date !== today) {
         store = { date: today, counts: {} };
     }
@@ -345,44 +379,93 @@ function updateQuotaUI() {
     if (!currentDataset) return;
     const store = getDailyQuota();
     const used = store.counts[currentDataset.id] || 0;
-    const remaining = Math.max(0, 3 - used);
+    const remaining = Math.max(0, 50 - used);
 
     const demoPayBtn = document.getElementById("demoPayBtn");
     if (demoPayBtn) {
         if (remaining > 0) {
             demoPayBtn.disabled = false;
-            demoPayBtn.innerHTML = `<span><i class="fa-solid fa-gift"></i> Use Free Daily Request</span><span class="quota-badge">${remaining} / 3 Left</span>`;
+            demoPayBtn.innerHTML = `<span><i class="fa-solid fa-bolt"></i> Fetch Live Data (Free Test)</span><span class="quota-badge">${remaining} / 50 Left Today</span>`;
         } else {
             demoPayBtn.disabled = true;
-            demoPayBtn.innerHTML = `<span><i class="fa-solid fa-lock"></i> Free Quota Exhausted</span><span class="quota-badge quota-badge-used">0 / 3 Left</span>`;
+            demoPayBtn.innerHTML = `<span><i class="fa-solid fa-lock"></i> Daily Limit Reached</span><span class="quota-badge quota-badge-used">0 / 50 Left</span>`;
         }
     }
 }
 
-window.useFreeDailyRequest = function() {
+// Real-Time Live API Fetching Function
+window.fetchLiveData = async function() {
     if (!currentDataset) return;
     const store = getDailyQuota();
     const used = store.counts[currentDataset.id] || 0;
     
-    if (used >= 3) {
-        alert("Daily free quota (3/3) reached for this dataset today. Please connect Web3 Wallet or paste a Tx Hash to pay 0.01 USDC for unlimited access!");
+    if (used >= 50) {
+        alert("Daily free quota (50/50) reached for this dataset today. Please connect Web3 Wallet or paste a Tx Hash to pay 0.01 USDC for unlimited access!");
         return;
     }
 
-    // Increment quota usage
-    store.counts[currentDataset.id] = used + 1;
-    localStorage.setItem("datahub_daily_quota_v2", JSON.stringify(store));
-    
-    currentTxHash = "0x" + Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
-    updateQuotaUI();
-    window.demoInstantUnlock(true); // Unlock full live feed!
-
     const paymentStatus = document.getElementById("paymentStatus");
     if (paymentStatus) {
-        paymentStatus.className = "status-msg success";
-        paymentStatus.innerText = `🎁 Free Daily Request (${used + 1}/3) Applied! Full Live Feed Unlocked.`;
+        paymentStatus.className = "status-msg loading";
+        paymentStatus.innerText = "⚡ Fetching live feed from Cloudflare Worker API...";
+    }
+
+    const jsonPreview = document.getElementById("jsonPreview");
+    if (jsonPreview) jsonPreview.innerText = "// Loading real-time data from Cloudflare Worker...";
+
+    try {
+        const workerUrl = `https://data-hub-api.izzor2021.workers.dev${currentDataset.endpoint}`;
+        const res = await fetch(workerUrl);
+        
+        if (res.ok) {
+            const data = await res.json();
+            
+            // Increment quota count
+            store.counts[currentDataset.id] = used + 1;
+            localStorage.setItem("datahub_daily_quota_v3", JSON.stringify(store));
+
+            currentUnlockedData = data;
+            updateQuotaUI();
+
+            if (jsonPreview) jsonPreview.innerText = JSON.stringify(data, null, 2);
+
+            const previewTitle = document.getElementById("previewTitle");
+            if (previewTitle) previewTitle.innerText = "Live Data Feed (HTTP 200 OK)";
+
+            if (paymentStatus) {
+                paymentStatus.className = "status-msg success";
+                paymentStatus.innerText = `⚡ Live Data Fetched! (${used + 1}/50 Free Daily Requests Used).`;
+            }
+
+            const unlockedActions = document.getElementById("unlockedActions");
+            if (unlockedActions) unlockedActions.classList.remove("hidden");
+
+            const modalDlBtn = document.getElementById("modalDlBtn");
+            if (modalDlBtn) modalDlBtn.classList.remove("hidden");
+            
+            updateModalSnippet();
+        } else {
+            // Fallback to sample schema if HTTP 402 or error
+            window.demoInstantUnlock(false);
+        }
+
+    } catch (err) {
+        console.warn("Live fetch fallback to schema preview:", err);
+        window.demoInstantUnlock(false);
     }
 };
+
+window.useFreeDailyRequest = function() {
+    window.fetchLiveData();
+};
+
+function updateModalSnippet() {
+    if (!currentDataset) return;
+    const modalCodeSnippet = document.getElementById("modalCodeSnippet");
+    if (modalCodeSnippet) {
+        modalCodeSnippet.innerText = generateSnippet(currentDataset.endpoint, selectedSnippetLang, currentTxHash || "");
+    }
+}
 
 // Open Modal
 function openModal(dataset) {
@@ -422,14 +505,11 @@ function openModal(dataset) {
 
     const unlockedActions = document.getElementById("unlockedActions");
     if (unlockedActions) unlockedActions.classList.add("hidden");
-
-    const apiSnippetBox = document.getElementById("apiSnippetBox");
-    if (apiSnippetBox) apiSnippetBox.classList.add("hidden");
     
     const paymentStatus = document.getElementById("paymentStatus");
     if (paymentStatus) {
         paymentStatus.className = "status-msg";
-        paymentStatus.innerText = web3Wallet ? `Wallet connected (${web3Wallet.substring(0, 6)}...). Use free daily request or pay 0.01 USDC.` : "3 Free daily requests available today. Pay 0.01 USDC for unlimited live feed.";
+        paymentStatus.innerText = web3Wallet ? `Wallet connected (${web3Wallet.substring(0, 6)}...). Use 50 free daily requests or pay 0.01 USDC.` : "50 Free daily requests available per dataset. Pay 0.01 USDC for unlimited live feed.";
     }
 
     const web3PayBtn = document.getElementById("web3PayBtn");
@@ -442,6 +522,7 @@ function openModal(dataset) {
         }
     }
 
+    updateModalSnippet();
     updateQuotaUI();
     detailModal.classList.add("open");
 }
@@ -488,16 +569,8 @@ window.demoInstantUnlock = function(isFullPayment = true) {
         const unlockedActions = document.getElementById("unlockedActions");
         if (unlockedActions) unlockedActions.classList.remove("hidden");
         
-        const apiSnippetBox = document.getElementById("apiSnippetBox");
-        if (apiSnippetBox) apiSnippetBox.classList.remove("hidden");
-        
-        const apiCurlSnippet = document.getElementById("apiCurlSnippet");
-        if (apiCurlSnippet) {
-            const workerUrl = `https://data-hub-api.izzor2021.workers.dev${currentDataset.endpoint}`;
-            apiCurlSnippet.innerText = `curl -H "x-payment-tx: ${currentTxHash}" "${workerUrl}"`;
-        }
+        updateModalSnippet();
     } else {
-        // Free Sample Schema Preview
         const modalDlBtn = document.getElementById("modalDlBtn");
         if (modalDlBtn) modalDlBtn.classList.add("hidden");
         if (paymentStatus) {
@@ -518,15 +591,8 @@ window.demoInstantUnlock = function(isFullPayment = true) {
 
         const unlockedActions = document.getElementById("unlockedActions");
         if (unlockedActions) unlockedActions.classList.add("hidden");
-        
-        const apiSnippetBox = document.getElementById("apiSnippetBox");
-        if (apiSnippetBox) apiSnippetBox.classList.add("hidden");
     }
 };
-
-function demoInstantUnlock() {
-    window.demoInstantUnlock(false); // Default to Free Sample Preview when clicking demo button
-}
 
 // Web3 Payment Handler
 async function processWeb3Payment() {
@@ -534,7 +600,7 @@ async function processWeb3Payment() {
     if (!window.ethereum) {
         if (paymentStatus) {
             paymentStatus.className = "status-msg error";
-            paymentStatus.innerText = "MetaMask missing. Click 'Instant Demo Unlock' below to test!";
+            paymentStatus.innerText = "MetaMask missing. Click 'Fetch Live Data' to test for free!";
         }
         return;
     }
@@ -583,8 +649,6 @@ async function processWeb3Payment() {
                         method: "wallet_addEthereumChain",
                         params: [chainParams]
                     });
-                } else {
-                    console.warn("Chain switch note:", switchError);
                 }
             }
         }
@@ -618,7 +682,6 @@ async function processWeb3Payment() {
             });
         } catch (tokenErr) {
             console.warn("USDC token transfer simulation note:", tokenErr);
-            // Fallback to Native ETH micro-payment (~0.000003 ETH = $0.01 USD) if native USDC token is not held
             if (paymentStatus) {
                 paymentStatus.className = "status-msg loading";
                 paymentStatus.innerText = "Switching to direct ETH micro-payment (0.000003 ETH)...";
@@ -626,7 +689,7 @@ async function processWeb3Payment() {
             txParams = {
                 from: web3Wallet,
                 to: MERCHANT_WALLET,
-                value: "0x2b5e3af16b00" // ~0.000003 ETH ($0.01 USD)
+                value: "0x2b5e3af16b00"
             };
             txHash = await provider.request({
                 method: "eth_sendTransaction",
@@ -647,7 +710,7 @@ async function processWeb3Payment() {
             if (errStr.includes("user rejected") || errStr.includes("User rejected")) {
                 paymentStatus.innerText = "Transaction cancelled by user.";
             } else {
-                paymentStatus.innerText = "Insufficient ETH gas balance or testnet token. Click '⚡ Instant Demo Unlock' below!";
+                paymentStatus.innerText = "Insufficient ETH gas balance or testnet token. Click 'Fetch Live Data' to test for free!";
             }
         }
     }
@@ -676,21 +739,6 @@ function copyUnlockedJson() {
             setTimeout(() => { btn.innerHTML = orig; }, 2000);
         }
     });
-}
-
-// Copy cURL
-function copyApiSnippet() {
-    const snippet = document.getElementById("apiCurlSnippet");
-    if (snippet) {
-        navigator.clipboard.writeText(snippet.innerText).then(() => {
-            const btn = document.getElementById("copySnippetBtn");
-            if (btn) {
-                const orig = btn.innerHTML;
-                btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
-                setTimeout(() => { btn.innerHTML = orig; }, 2000);
-            }
-        });
-    }
 }
 
 // Setup Event Listeners safely
@@ -733,7 +781,7 @@ function setupEventListeners() {
     if (web3PayBtn) web3PayBtn.addEventListener("click", processWeb3Payment);
 
     const demoPayBtn = document.getElementById("demoPayBtn");
-    if (demoPayBtn) demoPayBtn.addEventListener("click", window.useFreeDailyRequest);
+    if (demoPayBtn) demoPayBtn.addEventListener("click", window.fetchLiveData);
 
     const netArb = document.getElementById("netArb");
     if (netArb) netArb.addEventListener("click", () => {
@@ -768,84 +816,53 @@ function setupEventListeners() {
         });
     }
 
-    const verifyHashBtn = document.getElementById("verifyHashBtn");
-    if (verifyHashBtn) {
-        verifyHashBtn.addEventListener("click", async () => {
-            const input = document.getElementById("manualTxHash");
-            const hashVal = input ? input.value.trim() : "";
-            const cleanHash = hashVal.toLowerCase();
-            const paymentStatus = document.getElementById("paymentStatus");
+    // Modal Snippet Tab Switching
+    document.querySelectorAll(".snippet-tab").forEach(tab => {
+        tab.addEventListener("click", (e) => {
+            document.querySelectorAll(".snippet-tab").forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            selectedSnippetLang = tab.dataset.lang || "curl";
+            updateModalSnippet();
+        });
+    });
 
-            if (!hashVal || !hashVal.startsWith("0x") || hashVal.length !== 66) {
-                if (paymentStatus) {
-                    paymentStatus.className = "status-msg error";
-                    paymentStatus.innerText = "❌ Invalid format. Tx Hash must be 66 characters starting with 0x.";
-                }
-                return;
-            }
-
-            // Anti-Replay Single-Use Check
-            const redeemedTxHashes = JSON.parse(sessionStorage.getItem("redeemedTxHashes") || "{}");
-            if (currentDataset && redeemedTxHashes[cleanHash] && redeemedTxHashes[cleanHash] !== currentDataset.id) {
-                if (paymentStatus) {
-                    paymentStatus.className = "status-msg error";
-                    paymentStatus.innerText = `❌ Replay Attack Blocked: Tx Hash ${cleanHash.substring(0, 10)}... was already used to unlock dataset "${redeemedTxHashes[cleanHash]}". Each 0.01 USDC payment unlocks 1 dataset.`;
-                }
-                return;
-            }
-
-            if (paymentStatus) {
-                paymentStatus.className = "status-msg loading";
-                paymentStatus.innerText = `⌛ Querying ${selectedNetwork === 'arbitrum' ? 'Arbitrum' : 'Base'} RPC node for on-chain status...`;
-            }
-
-            const rpcUrl = selectedNetwork === "arbitrum" ? "https://arb1.arbitrum.io/rpc" : "https://mainnet.base.org";
-
-            try {
-                const response = await fetch(rpcUrl, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        jsonrpc: "2.0",
-                        method: "eth_getTransactionReceipt",
-                        params: [hashVal],
-                        id: 1
-                    })
+    // Copy Modal Snippet Button
+    const copyModalSnippetBtn = document.getElementById("copyModalSnippetBtn");
+    if (copyModalSnippetBtn) {
+        copyModalSnippetBtn.addEventListener("click", () => {
+            const snippet = document.getElementById("modalCodeSnippet");
+            if (snippet) {
+                navigator.clipboard.writeText(snippet.innerText).then(() => {
+                    const orig = copyModalSnippetBtn.innerHTML;
+                    copyModalSnippetBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
+                    setTimeout(() => { copyModalSnippetBtn.innerHTML = orig; }, 2000);
                 });
-                const data = await response.json();
-                
-                if (data && data.result && data.result.status === "0x1") {
-                    const blockNum = parseInt(data.result.blockNumber, 16);
-                    currentTxHash = hashVal;
+            }
+        });
+    }
 
-                    // Bind Tx Hash to current dataset to prevent reuse
-                    if (currentDataset) {
-                        redeemedTxHashes[cleanHash] = currentDataset.id;
-                        sessionStorage.setItem("redeemedTxHashes", JSON.stringify(redeemedTxHashes));
-                    }
+    // Doc Snippet Tab Switching
+    document.querySelectorAll(".doc-tab").forEach(tab => {
+        tab.addEventListener("click", (e) => {
+            document.querySelectorAll(".doc-tab").forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            selectedDocLang = tab.dataset.lang || "curl";
+            const docDisplay = document.getElementById("docCodeDisplay");
+            if (docDisplay) {
+                docDisplay.innerText = generateSnippet("/ai/llm-latency", selectedDocLang);
+            }
+        });
+    });
 
-                    window.demoInstantUnlock(true); // Unlock full feed!
-                    if (paymentStatus) {
-                        paymentStatus.className = "status-msg success";
-                        paymentStatus.innerText = `✓ On-Chain Payment Verified! Single-use Tx registered for ${currentDataset.title} (Block #${blockNum}).`;
-                    }
-                } else if (data && data.result && data.result.status === "0x0") {
-                    if (paymentStatus) {
-                        paymentStatus.className = "status-msg error";
-                        paymentStatus.innerText = "❌ Transaction reverted on-chain (Status: Failed). Access denied.";
-                    }
-                } else {
-                    if (paymentStatus) {
-                        paymentStatus.className = "status-msg error";
-                        paymentStatus.innerText = `❌ Transaction ${hashVal.substring(0, 10)}... not found on ${selectedNetwork === 'arbitrum' ? 'Arbitrum' : 'Base'} network.`;
-                    }
-                }
-            } catch (err) {
-                console.error("RPC verification error:", err);
-                if (paymentStatus) {
-                    paymentStatus.className = "status-msg error";
-                    paymentStatus.innerText = "❌ RPC network verification error. Please check network connection.";
-                }
+    const copyDocCodeBtn = document.getElementById("copyDocCodeBtn");
+    if (copyDocCodeBtn) {
+        copyDocCodeBtn.addEventListener("click", () => {
+            const docDisplay = document.getElementById("docCodeDisplay");
+            if (docDisplay) {
+                navigator.clipboard.writeText(docDisplay.innerText).then(() => {
+                    copyDocCodeBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
+                    setTimeout(() => { copyDocCodeBtn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy Code`; }, 2000);
+                });
             }
         });
     }
@@ -858,22 +875,6 @@ function setupEventListeners() {
 
     const modalDlBtn = document.getElementById("modalDlBtn");
     if (modalDlBtn) modalDlBtn.addEventListener("click", downloadUnlockedJson);
-
-    const copySnippetBtn = document.getElementById("copySnippetBtn");
-    if (copySnippetBtn) copySnippetBtn.addEventListener("click", copyApiSnippet);
-
-    const copyCodeBtn = document.getElementById("copyCodeBtn");
-    if (copyCodeBtn) {
-        copyCodeBtn.addEventListener("click", () => {
-            const codeText = document.getElementById("pythonCode");
-            if (codeText) {
-                navigator.clipboard.writeText(codeText.innerText).then(() => {
-                    copyCodeBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
-                    setTimeout(() => { copyCodeBtn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy Code`; }, 2000);
-                });
-            }
-        });
-    }
 }
 
 // Document Ready Bootstrap
@@ -882,7 +883,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCards();
 });
 
-// Fallback execution
 if (document.readyState === "complete" || document.readyState === "interactive") {
     setupEventListeners();
     renderCards();

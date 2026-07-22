@@ -10,6 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Top Promo Banner -->
+    <div class="launch-promo-banner">
+        <div class="container promo-container">
+            <span class="promo-badge"><i class="fa-solid fa-fire"></i> LAUNCH SPECIAL</span>
+            <span class="promo-text"><strong>14-Day Free Access Active:</strong> 50 Free Daily Requests per Dataset for Developers & AI Agents! No credit card required.</span>
+        </div>
+    </div>
+
     <!-- Top Navigation Bar -->
     <header class="navbar">
         <div class="container nav-container">
@@ -49,8 +57,8 @@
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-box">
-                    <span class="stat-value">$0.01</span>
-                    <span class="stat-label">Starting Price</span>
+                    <span class="stat-value">50 / Day</span>
+                    <span class="stat-label">Free Test Tier</span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-box">
@@ -71,7 +79,7 @@
         <div class="catalog-header">
             <div>
                 <h2>Explore Data Feeds</h2>
-                <p class="section-desc">Select a dataset to inspect schema, connect wallet, or unlock instantly.</p>
+                <p class="section-desc">Select a dataset to test live, inspect schema, connect wallet, or unlock feed.</p>
             </div>
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -105,15 +113,14 @@
             </div>
             <div class="code-example">
                 <div class="code-header">
-                    <span>Python Example</span>
-                    <button class="copy-btn" id="copyCodeBtn"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                    <div class="snippet-tab-group">
+                        <button class="doc-tab active" data-lang="curl">cURL</button>
+                        <button class="doc-tab" data-lang="python">Python</button>
+                        <button class="doc-tab" data-lang="js">JavaScript</button>
+                    </div>
+                    <button class="copy-btn" id="copyDocCodeBtn"><i class="fa-regular fa-copy"></i> Copy Code</button>
                 </div>
-                <pre><code id="pythonCode">import requests
-
-url = "https://data-hub-api.izzor2021.workers.dev/ai/llm-latency"
-headers = {"x-payment-tx": "0xdc51b4810baf023cd62d5a846ee5d022517c041802c7e03c781d6add6ecce9c4"}
-response = requests.get(url, headers=headers)
-print("Unlocked Data:", response.json())</code></pre>
+                <pre><code id="docCodeDisplay">curl -s https://data-hub-api.izzor2021.workers.dev/ai/llm-latency</code></pre>
             </div>
         </div>
     </section>
@@ -132,6 +139,19 @@ print("Unlocked Data:", response.json())</code></pre>
                 <div class="modal-left">
                     <h4>Description</h4>
                     <p id="modalDesc">Detailed dataset description...</p>
+
+                    <div class="code-snippet-box">
+                        <div class="snippet-header">
+                            <span class="snippet-title"><i class="fa-solid fa-code"></i> Integration Snippets</span>
+                            <div class="snippet-tabs">
+                                <button class="snippet-tab active" data-lang="curl">cURL</button>
+                                <button class="snippet-tab" data-lang="python">Python</button>
+                                <button class="snippet-tab" data-lang="js">JavaScript</button>
+                            </div>
+                        </div>
+                        <pre><code id="modalCodeSnippet">curl -s https://data-hub-api.izzor2021.workers.dev/saas/ai-api-pricing</code></pre>
+                        <button class="copy-snippet-btn" id="copyModalSnippetBtn"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                    </div>
                     
                     <div class="payment-card">
                         <div class="payment-card-header">
@@ -148,15 +168,15 @@ print("Unlocked Data:", response.json())</code></pre>
                         </div>
 
                         <button class="btn-demo-unlock" id="demoPayBtn">
-                            <span><i class="fa-solid fa-gift"></i> Use Free Daily Request</span>
-                            <span class="quota-badge" id="quotaText">3 / 3 Left</span>
+                            <span><i class="fa-solid fa-bolt"></i> Fetch Live Data (Free Test)</span>
+                            <span class="quota-badge" id="quotaText">50 / 50 Left Today</span>
                         </button>
 
                         <button class="btn-pay-primary" id="web3PayBtn">
                             <i class="fa-solid fa-wallet"></i> Pay 0.01 USDC for Unlimited Live Feed
                         </button>
                         
-                        <div class="status-msg" id="paymentStatus">3 Free daily requests available. Pay 0.01 USDC for unlimited live feed.</div>
+                        <div class="status-msg" id="paymentStatus">50 Free daily requests available. Pay 0.01 USDC for unlimited live feed.</div>
 
                         <button class="btn-download-big hidden" id="modalDlBtn">
                             <i class="fa-solid fa-download"></i> Download Unlocked .json Feed
