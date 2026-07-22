@@ -1098,3 +1098,24 @@ footer {
     color: #7dd3fc;
 }
 
+/* Web3 Security Trust Badge */
+.web3-trust-badge {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    margin: 0.8rem 0;
+    font-size: 0.78rem;
+    color: #a7f3d0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.web3-trust-badge i {
+    font-size: 1.1rem;
+    color: #10b981;
+    flex-shrink: 0;
+}
+
+
