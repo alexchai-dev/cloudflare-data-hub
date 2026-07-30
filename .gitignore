@@ -1,0 +1,35 @@
+# Environment variables & Secrets
+.env
+.env.*
+*.env
+secrets.json
+*config.json
+rclone.conf
+*.key
+*.pem
+cfat_*
+token*
+credentials*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+ENV/
+
+# Node / Frontend
+node_modules/
+dist/
+.npm
+
+# Operating System & IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
