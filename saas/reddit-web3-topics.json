@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "dataset_name": "Reddit Trending Web3 Discussions",
+    "last_updated": "2026-08-01T15:23:12.311438Z",
+    "source": "Reddit API Feed",
+    "note": "Most popular cryptocurrency and agent discussion threads on Reddit."
+  },
+  "topics": [
+    {
+      "subreddit": "r/cryptocurrency",
+      "title": "Base network daily active addresses hit new ATH",
+      "upvotes": 555,
+      "comments": 153
+    },
+    {
+      "subreddit": "r/solana",
+      "title": "AI agents are launching 90% of new tokens on Solana",
+      "upvotes": 320,
+      "comments": 139
+    },
+    {
+      "subreddit": "r/ethereum",
+      "title": "L2 gas fees remain under $0.001 after Dencun, paving way for agent microtransactions",
+      "upvotes": 307,
+      "comments": 121
+    },
+    {
+      "subreddit": "r/aiagents",
+      "title": "Which framework is better for local agent deployments: Eliza or ZerePy?",
+      "upvotes": 217,
+      "comments": 81
+    }
+  ]
+}

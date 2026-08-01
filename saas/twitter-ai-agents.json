@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "dataset_name": "Twitter Trending AI Agents (24h)",
+    "last_updated": "2026-08-01T15:23:12.311154Z",
+    "source": "Twitter/X Scraping Feed",
+    "note": "Top discussed AI Agent frameworks and protocols on X."
+  },
+  "agents": [
+    {
+      "name": "elizaOS",
+      "handle": "@elizaOS",
+      "category": "Framework",
+      "mentions_24h": 1618,
+      "sentiment": "Highly Positive"
+    },
+    {
+      "name": "Virtuals Protocol",
+      "handle": "@virtuals_io",
+      "category": "Tokenized Agents",
+      "mentions_24h": 964,
+      "sentiment": "Positive"
+    },
+    {
+      "name": "ZerePy",
+      "handle": "@ZerePy",
+      "category": "Framework",
+      "mentions_24h": 872,
+      "sentiment": "Positive"
+    },
+    {
+      "name": "Heurist AI",
+      "handle": "@heurist_ai",
+      "category": "Decentralized Compute",
+      "mentions_24h": 720,
+      "sentiment": "Neutral"
+    },
+    {
+      "name": "Wayfinder",
+      "handle": "@wayfinder_ai",
+      "category": "Navigation Agent",
+      "mentions_24h": 498,
+      "sentiment": "Highly Positive"
+    },
+    {
+      "name": "Aiakos",
+      "handle": "@aiakos_agent",
+      "category": "Security Agent",
+      "mentions_24h": 441,
+      "sentiment": "Positive"
+    },
+    {
+      "name": "Farcaster Auto-Agent",
+      "handle": "@fc_agent",
+      "category": "Social Agent",
+      "mentions_24h": 395,
+      "sentiment": "Positive"
+    }
+  ]
+}

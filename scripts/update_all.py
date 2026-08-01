@@ -8,10 +8,12 @@ from datetime import datetime
 try:
     import update_ai_pricing
     import update_social_data
+    import update_social_advanced
 except ImportError:
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
     import update_ai_pricing
     import update_social_data
+    import update_social_advanced
 
 try:
     import boto3
@@ -39,6 +41,13 @@ def update_all_metadata(data_dir):
     except Exception as e:
         print(f"[Ошибка] Не удалось запустить скрапер V2EX: {e}")
 
+    # 1.3 Запускаем просунутий скрапер Twitter/Reddit
+    try:
+        print("[Инфо] Запуск просунутого скрапера Twitter/Reddit...")
+        update_social_advanced.main()
+    except Exception as e:
+        print(f"[Ошибка] Не удалось запустить просунутий скрапер Twitter/Reddit: {e}")
+
     # 2. Обходим все JSON-файлы в разрешенных папках категорий
     updated_files = []
     
@@ -61,7 +70,7 @@ def update_all_metadata(data_dir):
                     file_path = os.path.join(root, file)
                     
                     # Не перезаписываем повторно динамически сгенерированные файлы
-                    if file in ["ai-api-pricing.json", "v2ex-hot-topics.json"]:
+                    if file in ["ai-api-pricing.json", "v2ex-hot-topics.json", "twitter-ai-agents.json", "reddit-web3-topics.json"]:
                         updated_files.append(file_path)
                         continue
                     

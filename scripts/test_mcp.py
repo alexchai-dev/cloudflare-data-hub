@@ -31,10 +31,13 @@ async def test_mcp_tools():
     
     print("[Тест] Тестирование 'buy_premium_dataset' с тестовым хешем...")
     res = await server.call_tool("buy_premium_dataset", arguments={
-        "dataset_name": "expat/living-costs",
+        "dataset_name": "saas/twitter-ai-agents",
         "tx_hash": "mock_hash"
     })
-    print(f"Результат покупки:\n{res.content[0].text}\n")
+    dataset_preview = json.loads(res.content[0].text)
+    print(f"Успешно разблокирован премиум-датасет: {dataset_preview['metadata']['dataset_name']}")
+    print(f"Первый агент в тренде: {dataset_preview['agents'][0]['name']}")
+    print()
 
     print("[Тест] Тестирование блокчейн верификации (verify_usdc_payment)...")
     # Проверим, что реальный фейковый хеш корректно отклоняется RPC

@@ -30,6 +30,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 DATASETS = {
     "saas/ai-api-pricing": {"type": "free", "description": "AI API Pricing & context windows from OpenRouter"},
     "events/v2ex-hot-topics": {"type": "free", "description": "V2EX hot trending topics and developer discussions"},
+    "saas/twitter-ai-agents": {"type": "premium", "description": "Top discussed AI Agent frameworks and protocols on X (Requires $0.01 USDC)"},
+    "saas/reddit-web3-topics": {"type": "premium", "description": "Most popular cryptocurrency and agent discussions on Reddit (Requires $0.01 USDC)"},
     "expat/living-costs": {"type": "premium", "description": "Structured cost of living indices for expats (Requires $0.01 USDC)"},
     "jobs/tech-salaries": {"type": "premium", "description": "Tech salaries and developer market rates (Requires $0.01 USDC)"},
     "finance/gas-tracker": {"type": "premium", "description": "Real-time gas metrics across EVM chains (Requires $0.01 USDC)"}
