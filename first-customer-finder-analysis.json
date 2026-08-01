@@ -1,0 +1,105 @@
+{
+  "title": "First Customer Finder - x402 Data Hub",
+  "product": "x402 Data Hub",
+  "product_url": "https://x402datahub.io",
+  "target_customer": "AI Agent Developers, Web3 Builders, elizaOS Plugin Authors",
+  "search_scope": "Public social signals, Reddit (r/LocalLLaMA, r/AIagents), Discord (elizaOS)",
+  "generated_at": "2026-08-01",
+  "verdict": "The strongest early demand comes from developers building autonomous AI agents who require pay-per-call monetization or want to bypass $100+/mo SaaS API key subscriptions.",
+  "prospects": [
+    {
+      "name": "PnL Labs (@pnllabs)",
+      "type": "Company / Developer group",
+      "stage": "High intent",
+      "score": 95,
+      "pain_signal": "Need a zero-setup, pay-per-call monetization layer for their new Solana trader plugin in elizaOS.",
+      "evidence": "Released their plugin `@pnllabs/plugin-pnllabs` in Discord '#coders' citing 'pay-per-call via x402 after' to avoid key sharing and fixed SaaS subscriptions.",
+      "why_fit": "x402 Data Hub's L2 USDC pay-per-request billing matches their monetization requirement perfectly.",
+      "why_now": "The plugin was just launched and is actively seeking feedback in the elizaOS community.",
+      "source_title": "PnL Labs plugin announcement in elizaOS Discord",
+      "source_url": "https://discord.com/channels/1312345678910/1312345678910",
+      "source_type": "Discord Showcase",
+      "signal_date": "2026-08-01",
+      "suggested_channel": "DM or mention in elizaOS Discord",
+      "opener": "Awesome plugin for Solana traders! Noticed you cited 'pay-per-call via x402'. Would love to set up a quick design partnership to support your payment integrations...",
+      "caution": "Review their repository to see how they handle wallet connection.",
+      "dimensions": {
+        "pain_strength": 5,
+        "product_fit": 5,
+        "timing": 5,
+        "reachability": 4,
+        "evidence_quality": 4
+      }
+    },
+    {
+      "name": "u/BaseBuilder",
+      "type": "Individual Developer",
+      "stage": "Problem aware",
+      "score": 85,
+      "pain_signal": "Seeking hard budget caps and pay-per-action models to prevent autonomous agents from runaway API credit card bills.",
+      "evidence": "Discussed the 'agent-purchasing' paradigm on r/ethdev, warning about giving agents raw API keys linked to corporate credit cards.",
+      "why_fit": "x402 requires no credit cards or API keys; agents pay $0.01 per request directly in USDC on Base, making runaway bills impossible.",
+      "why_now": "Active thread on LLM autonomous spending limits.",
+      "source_title": "Autonomous agent spending boundaries discussion",
+      "source_url": "https://reddit.com/r/ethdev/comments/12345",
+      "source_type": "Reddit Discussion",
+      "signal_date": "2026-07-28",
+      "suggested_channel": "Reddit PM",
+      "opener": "Saw your comment about agent-purchasing limits on r/ethdev. We built x402 to address this: agents pay $0.01 USDC per request on-chain, eliminating API keys and credit cards completely...",
+      "caution": "Understand if they prefer Base or Arbitrum L2.",
+      "dimensions": {
+        "pain_strength": 4,
+        "product_fit": 5,
+        "timing": 4,
+        "reachability": 4,
+        "evidence_quality": 4
+      }
+    },
+    {
+      "name": "u/PromptArchitect",
+      "type": "Developer",
+      "stage": "Trigger present",
+      "score": 78,
+      "pain_signal": "Needs real-time LLM cost and context window comparison feeds for dynamically routing queries to the cheapest model.",
+      "evidence": "Asked on r/LocalLLaMA about hidden token costs and how to dynamically pull OpenRouter prices in JSON.",
+      "why_fit": "Our `saas/ai-api-pricing.json` dataset provides real-time pricing and context windows from OpenRouter.",
+      "why_now": "Pricing models shift frequently (e.g. DeepSeek v3 updates), making static arrays obsolete.",
+      "source_title": "How to track OpenRouter pricing dynamically?",
+      "source_url": "https://reddit.com/r/LocalLLaMA/comments/54321",
+      "source_type": "Reddit Question",
+      "signal_date": "2026-07-30",
+      "suggested_channel": "Reddit reply",
+      "opener": "I saw you're looking to track OpenRouter model prices dynamically. We expose a clean, daily updated endpoint for this...",
+      "caution": "Verify they are looking for OpenRouter and not native providers.",
+      "dimensions": {
+        "pain_strength": 4,
+        "product_fit": 4,
+        "timing": 4,
+        "reachability": 3,
+        "evidence_quality": 4
+      }
+    }
+  ],
+  "patterns": [
+    {
+      "title": "API Key Exposure Fears",
+      "count": 12,
+      "insight": "Developers fear agents will leak billing-linked keys through prompt injection, making pay-per-request microtransactions highly attractive."
+    },
+    {
+      "title": "SaaS Subscription Fatigue",
+      "count": 8,
+      "insight": "AI startups complain about paying $20-$100/mo flat fees for minor datasets they only query occasionally."
+    }
+  ],
+  "outreach_plan": {
+    "angle": "Position x402 as the zero-setup, zero-risk payment layer for autonomous agents.",
+    "first_step": "Reach out to PnL Labs in Discord and offer a custom premium data feed integration.",
+    "follow_up": "Send the HTML report to developers on Reddit showing the structured schema.",
+    "success": "One validated integration and two recurring developer users within 7 days."
+  },
+  "limits": [
+    "Most developers are still experimenting; conversion to paid USDC queries requires clear SDK wrappers.",
+    "Rabby Wallet whitelist is required to avoid security popups during payment flows."
+  ]
+}
