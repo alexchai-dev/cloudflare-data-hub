@@ -107,16 +107,16 @@ export default {
     // Получаем транзакцию оплаты из заголовков запроса
     const txHash = request.headers.get("x-payment-tx");
 
-    // 14-Day Free Launch Promo Flag (Set to true during Launch Special, or controlled via env.FREE_TRIAL_MODE)
+    // Free Open Beta Flag (Set to true during beta, or controlled via env.FREE_TRIAL_MODE)
     const isLaunchPromo = env.FREE_TRIAL_MODE === "false" ? false : true;
 
     // Если транзакции нет — проверяем промо-акцию або выдаем 402 (Payment Required)
     if (!txHash) {
       if (isLaunchPromo) {
-        // Во время Launch Special отдаем данные бесплатно с промо-заголовком!
+        // Во время Open Beta отдаем данные бесплатно с промо-заголовком!
         const promoHeaders = new Headers({
           ...corsHeaders,
-          'x-launch-promo': '14-Day Free Launch Access Active (50 Free Requests/Day)',
+          'x-launch-promo': 'Free Open Beta Active (50 Free Requests/Day)',
           'ETag': object.httpEtag,
           'Last-Modified': object.uploaded.toUTCString()
         });
