@@ -63,66 +63,12 @@ def call_json_rpc(url: str, method: str, params: list) -> dict:
 def verify_usdc_payment(tx_hash: str) -> bool:
     """
     Verify if tx_hash is a valid transfer of 0.01 USDC ($0.01) to TREASURY_WALLET on Base.
-    Standard ERC20 Transfer event signature:
-    Transfer(address indexed from, address indexed to, uint256 value)
-    Topic 0: 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+    During the Free Open Beta, all premium datasets are accessible for free (any string works as tx_hash).
     """
-    # Если это тестовый хеш заглушки
-    if tx_hash.lower() in ["test_hash", "mock_hash", "0xmock"]:
-        return True
+    # Free Open Beta active: allow all requests
+    print("[Beta] Free Open Beta is active. Bypassing on-chain transaction check.", file=sys.stderr)
+    return True
 
-    print(f"[Инфо] Проверка транзакции {tx_hash} в Base RPC...", file=sys.stderr)
-    rpc_res = call_json_rpc(BASE_RPC_URL, "eth_getTransactionReceipt", [tx_hash])
-    
-    if not rpc_res or "result" not in rpc_res or rpc_res["result"] is None:
-        print(f"[Ошибка] Транзакция не найдена в блокчейне.", file=sys.stderr)
-        return False
-        
-    receipt = rpc_res["result"]
-    
-    # 1. Проверяем статус транзакции (0x1 = успех)
-    if receipt.get("status") != "0x1":
-        print(f"[Ошибка] Транзакция завершилась ошибкой в блокчейне.", file=sys.stderr)
-        return False
-        
-    # 2. Проверяем логи переводов ERC-20
-    logs = receipt.get("logs", [])
-    for log in logs:
-        # Проверяем, что адрес контракта — USDC
-        if log.get("address", "").lower() != BASE_USDC_CONTRACT.lower():
-            continue
-            
-        topics = log.get("topics", [])
-        if not topics:
-            continue
-            
-        # Topic 0 должен быть Transfer
-        transfer_event_sig = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
-        if topics[0].lower() != transfer_event_sig:
-            continue
-            
-        # Проверяем получателя (Topic 2 - indexed to)
-        if len(topics) >= 3:
-            recipient_topic = topics[2].lower()
-            # Переводим в 20-байтовый адрес
-            clean_recipient = "0x" + recipient_topic[-40:]
-            if clean_recipient != TREASURY_WALLET:
-                continue
-                
-            # Проверяем сумму перевода (value)
-            # USDC имеет 6 знаков после запятой, поэтому 0.01 USDC = 10000 wei/units (0.01 * 10^6)
-            data = log.get("data", "0x")
-            try:
-                value = int(data, 16)
-                # Разрешаем переводы от 10000 единиц ($0.01)
-                if value >= 10000:
-                    print(f"[Успех] Платеж {value / 1000000} USDC подтвержден!", file=sys.stderr)
-                    return True
-            except ValueError:
-                continue
-                
-    print("[Ошибка] Транзакция не содержит перевода USDC на кошелек казначейства.", file=sys.stderr)
-    return False
 
 # Инициализируем сервер
 server = MCPServer(
